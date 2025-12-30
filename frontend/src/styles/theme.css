@@ -1,0 +1,71 @@
+/*
+Custom theme file for Tailwind CSS v4.
+This file defines CSS variables for a dynamic and customizable color palette.
+These variables can be updated dynamically in JavaScript to reflect tenant-specific branding.
+Tailwind will then pick up these CSS variables to generate utility classes.
+*/
+
+@theme {
+  /* Primary Colors */
+  --color-primary-DEFAULT: var(--theme-primary, #0d9488);
+  /* Default to teal-600 */
+  --color-primary-foreground: var(--theme-primary-foreground, #ffffff);
+  /* Text color for primary background */
+
+  /* Secondary Colors */
+  --color-secondary-DEFAULT: var(--theme-secondary, #166534);
+  /* Default to green-800 */
+  --color-secondary-foreground: var(--theme-secondary-foreground, #ffffff);
+  /* Text color for secondary background */
+
+  /* General Background/Foreground */
+  --color-background: var(--theme-background, #ffffff);
+  /* Light mode background */
+  --color-foreground: var(--theme-foreground, #0f172a);
+  /* Light mode text (slate-900) */
+
+  /* Card Colors */
+  --color-card: var(--theme-card, #ffffff);
+  /* Card background */
+  --color-card-foreground: var(--theme-card-foreground, #0f172a);
+  /* Card text */
+
+  /* Muted Colors */
+  --color-muted: var(--theme-muted, #f1f5f9);
+  /* slate-100 */
+  --color-muted-foreground: var(--theme-muted-foreground, #64748b);
+  /* slate-500 */
+
+  /* Border Colors */
+  --color-border: var(--theme-border, #e2e8f0);
+  /* slate-200 */
+
+  /* Border Radius */
+  --radius: 0.5rem;
+  /* Base border radius */
+}
+
+@layer base {
+  :root {
+    /* Fondo principal: Un blanco grisáceo muy limpio */
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+
+    /* Tarjetas y Modales: Blanco puro */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    /* Colores Muted (lo que se ve oscuro en tu foto ahora) */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    /* El color de los bordes */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}

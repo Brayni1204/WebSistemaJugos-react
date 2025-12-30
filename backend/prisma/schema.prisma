@@ -1,0 +1,532 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum TenantStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model Tenant {
+  id               Int      @id @default(autoincrement())
+  name             String
+  subdomain        String   @unique
+  business_email   String?
+  contact_phone    String?
+  keywords         Json?
+  description      String?  @db.Text
+  theme_color      String?
+  theme_secondary_color String?
+  dark_mode_enabled Boolean  @default(true)
+  address          String?
+  about_us         String?  @db.Text
+  faq              Json?
+  shipping_policy  String?  @db.Text
+  terms_conditions String?  @db.Text
+  social_links     Json?
+  logo_url         String?
+  favicon_url      String?
+  hero_banner_url  String?
+  og_image_url     String?
+  mision           String?  @db.Text
+  vision           String?  @db.Text
+  mapa_url         String?
+  delivery_cost    Decimal  @default(0)
+  latitud          Decimal?
+  longitud         Decimal?
+  status           TenantStatus @default(ACTIVE)
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  users             User[]
+  clientes          Cliente[]
+  categorias        Categoria[]
+  productos         Producto[]
+  componentes       Componente[]
+  historial_precios HistorialPrecio[]
+  pedidos           Pedido[]
+  detalle_pedidos   DetallePedido[]
+  ventas            Venta[]
+  detalle_ventas    DetalleVenta[]
+  mesas             Mesa[]
+  estado_pedidos    EstadoPedido[]
+  pagos             Pago[]
+  direcciones       Direccion[]
+  paginas           Pagina[]
+  subtitulos        Subtitulo[]
+  parrafos          Parrafo[]
+  images            Image[]
+  roles             Role[]
+  empresas          Empresa[]
+  resenas           Resena[]
+  carts             Cart[]
+  proveedores       Proveedor[]
+  gastos            Gasto[]
+}  
+
+model Proveedor {
+  id        Int      @id @default(autoincrement())
+  name      String
+  ruc       String?  @unique
+  email     String?
+  phone     String?
+  address   String?
+  
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+  gastos   Gasto[] 
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@unique([name, tenantId])
+}
+
+model Gasto {
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  total_amount Decimal
+  proveedor   Proveedor? @relation(fields: [proveedorId], references: [id])
+  proveedorId Int? 
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  tenantId    Int
+  
+  items       DetalleGasto[]
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model DetalleGasto {
+  id              Int      @id @default(autoincrement())
+  description     String   
+  quantity        Int
+  purchase_price  Decimal
+
+  gasto           Gasto    @relation(fields: [gastoId], references: [id])
+  gastoId         Int
+  producto        Producto? @relation(fields: [productoId], references: [id])
+  productoId      Int? 
+
+  @@unique([gastoId, productoId])
+}
+  
+model Empresa {
+  id               Int      @id @default(autoincrement())
+  nombre           String
+  descripcion      String?  @db.Text
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  tenant           Tenant @relation(fields: [tenantId], references: [id])
+  tenantId         Int
+
+  @@unique([tenantId])
+}
+
+model User {
+  id                        Int       @id @default(autoincrement())
+  name                      String
+  email                     String
+  email_verified_at         DateTime?
+  verificationCode          String?
+  verificationCodeExpiresAt DateTime?
+  password                  String
+  pin                       String?
+  two_factor_secret         String?
+  two_factor_recovery_codes String?
+  two_factor_confirmed_at   DateTime?
+  remember_token            String?
+  is_active                 Boolean   @default(true)
+  profile_photo_path        String?   @db.VarChar(2048)
+  created_at                DateTime  @default(now())
+  updated_at                DateTime  @updatedAt
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+
+  cliente  Cliente?
+  pedidos  Pedido[]
+  ventas   Venta[]
+  roles    Role[] 
+  resenas  Resena[] 
+  cart     Cart?
+
+  @@unique([email, tenantId])
+}
+
+model Cliente {
+  id        Int      @id @default(autoincrement())
+  nombre    String?
+  apellidos String?
+  email     String
+  telefono  String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user      User?    @relation(fields: [user_id], references: [id])
+  user_id   Int?     @unique
+  pedidos   Pedido[]
+  ventas    Venta[]
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+
+  @@unique([email, tenantId])
+}
+
+model Categoria {
+  id           Int      @id @default(autoincrement())
+  nombre_categoria String   @db.VarChar(100)
+  descripcion  String?
+  status       Int      @default(1)
+  imageUrl     String?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  productos    Producto[]
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+
+  @@unique([nombre_categoria, tenantId])
+}
+
+model Producto {
+  id              Int      @id @default(autoincrement())
+  nombre_producto String   @db.VarChar(150)
+  descripcion     String?
+  stock           Int
+  status          Int      @default(1)
+  precio_venta    Decimal
+  precio_compra   Decimal
+  imageUrl        String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  categoria       Categoria @relation(fields: [id_categoria], references: [id])
+  id_categoria    Int
+  tracks_stock    Boolean  @default(true)
+
+  historial_precios HistorialPrecio[]
+  detalle_pedidos   DetallePedido[]
+  detalle_ventas    DetalleVenta[]
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+  componentes     Componente[]
+  resenas         Resena[] 
+  cartItems       CartItem[]
+  gastos          DetalleGasto[]
+}
+
+model Componente {
+  id                Int      @id @default(autoincrement())
+  nombre_componente String   @db.VarChar(100)
+  status            Int      @default(1)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+  productos         Producto[]
+
+  @@unique([nombre_componente, tenantId])
+}
+
+model Resena {
+  id         Int      @id @default(autoincrement())
+  rating     Int
+  comment    String?  @db.Text
+  status     ReviewStatus @default(PENDING) 
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  producto   Producto @relation(fields: [productoId], references: [id])
+  productoId Int
+
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+
+  tenant     Tenant   @relation(fields: [tenantId], references: [id])
+  tenantId   Int
+
+  @@unique([productoId, userId])
+}
+
+model Cart {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int      @unique 
+
+  tenant     Tenant   @relation(fields: [tenantId], references: [id])
+  tenantId   Int
+
+  items      CartItem[]
+
+  @@unique([userId, tenantId]) 
+}
+
+model CartItem {
+  id         Int      @id @default(autoincrement())
+  quantity   Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  cart       Cart     @relation(fields: [cartId], references: [id])
+  cartId     Int
+
+  producto   Producto @relation(fields: [productoId], references: [id])
+  productoId Int
+
+  @@unique([cartId, productoId])
+}
+
+
+model HistorialPrecio {
+  id            Int      @id @default(autoincrement())
+  precio_venta  Decimal
+  precio_compra Decimal
+  fecha_inicio  DateTime
+  fecha_fin     DateTime?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  producto      Producto @relation(fields: [id_producto], references: [id])
+  id_producto   Int
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model Pedido {
+  id             Int      @id @default(autoincrement())
+  metodo_entrega String?  @default("en local")
+  subtotal       Decimal
+  costo_delivery Decimal
+  total_pago     Decimal
+  estado         String   @default("pendiente")
+  metodo_pago    String?
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  mesa           Mesa?    @relation(fields: [mesa_id], references: [id])
+  mesa_id        Int?
+  user           User?    @relation(fields: [id_user], references: [id])
+  id_user        Int?
+  cliente        Cliente? @relation(fields: [cliente_id], references: [id])
+  cliente_id     Int?
+  detalle_pedidos DetallePedido[]
+  ventas         Venta[]
+  estado_pedidos EstadoPedido[]
+  pagos          Pago[]
+  direcciones    Direccion[]
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model DetallePedido {
+  id              Int      @id @default(autoincrement())
+  nombre_producto String
+  cantidad        Int
+  precio_unitario Decimal
+  precio_total    Decimal
+  descripcion     String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  pedido          Pedido   @relation(fields: [pedido_id], references: [id])
+  pedido_id       Int
+  producto        Producto @relation(fields: [producto_id], references: [id])
+  producto_id     Int
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model Venta {
+  id             Int      @id @default(autoincrement())
+  subtotal       Decimal
+  costo_delivery Decimal  @default(0)
+  total_pago     Decimal
+  estado         String   @default("completado")
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  user           User?    @relation(fields: [id_user], references: [id])
+  id_user        Int?
+  pedido         Pedido?  @relation(fields: [pedido_id], references: [id])
+  pedido_id      Int?
+  cliente        Cliente? @relation(fields: [cliente_id], references: [id])
+  cliente_id     Int?
+  detalle_ventas DetalleVenta[]
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model DetalleVenta {
+  id              Int      @id @default(autoincrement())
+  nombre_producto String
+  cantidad        Int
+  precio_unitario Decimal
+  precio_total    Decimal
+  descripcion     String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  venta           Venta    @relation(fields: [venta_id], references: [id])
+  venta_id        Int
+  producto        Producto @relation(fields: [producto_id], references: [id])
+  producto_id     Int
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model Mesa {
+  id          Int      @id @default(autoincrement())
+  uuid        String   @unique
+  numero_mesa Int
+  estado      String   @default("disponible")
+  codigo_qr   String?
+  status      Int      @default(1)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  pedidos     Pedido[]
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+
+  @@unique([numero_mesa, tenantId])
+}
+
+model EstadoPedido {
+  id         Int      @id @default(autoincrement())
+  estado     String   @default("En local")
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  pedido     Pedido   @relation(fields: [pedido_id], references: [id])
+  pedido_id  Int
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model Pago {
+  id             Int      @id @default(autoincrement())
+  total_pago     Decimal
+  monto_recibido Decimal
+  vuelto         Decimal
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  pedido         Pedido   @relation(fields: [pedido_id], references: [id])
+  pedido_id      Int
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model Direccion {
+  id           Int      @id @default(autoincrement())
+  departamento String
+  provincia    String
+  distrito     String
+  calle        String
+  numero       String?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  pedido       Pedido   @relation(fields: [pedido_id], references: [id])
+  pedido_id    Int
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model Pagina {
+  id             Int      @id @default(autoincrement())
+  titulo_paginas String
+  slug           String
+  resumen        String?
+  status         Int      @default(1)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  subtitulos     Subtitulo[]
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+  
+  @@unique([slug, tenantId])
+}
+
+model Subtitulo {
+  id               Int      @id @default(autoincrement())
+  titulo_subtitulo String   @db.VarChar(200)
+  resumen          String?
+  status           Int      @default(1)
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  pagina           Pagina   @relation(fields: [id_pagina], references: [id])
+  id_pagina        Int
+  parrafos         Parrafo[]
+  image            Image?   @relation(fields: [imageId], references: [id])
+  imageId          Int?     @unique
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model Parrafo {
+  id           Int      @id @default(autoincrement())
+  contenido    String   @db.Text
+  status       Int      @default(1)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  subtitulo    Subtitulo @relation(fields: [id_subtitulo], references: [id])
+  id_subtitulo Int
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model Image {
+  id             Int      @id @default(autoincrement())
+  url            String
+  imageable_id   Int?
+  imageable_type String?
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  subtitulo      Subtitulo?
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+}
+
+model Role {
+  id          Int      @id @default(autoincrement())
+  name        String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  users       User[]
+  permissions Permission[]
+
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId Int
+
+  @@unique([name, tenantId])
+}
+
+model Permission {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  roles Role[]
+}
