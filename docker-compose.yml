@@ -50,15 +50,15 @@ services:
       - app-network
 
   prisma-studio:
-    image: web-sistema-jugueria-prisma-studio-custom:latest
-    build:
-      context: ./backend # Le dice a Docker/Portainer que construya desde la carpeta backend
-      dockerfile: Dockerfile
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./backend:/app
     ports:
       - "6093:5555"
     environment:
       - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
-    command: sh -c "npx prisma generate --schema=./prisma/schema.prisma && npx prisma studio --port 5555 --schema=./prisma/schema.prisma"
+    command: sh -c "npx prisma generate && npx prisma studio --port 5555"
     depends_on:
       - db
     networks:
