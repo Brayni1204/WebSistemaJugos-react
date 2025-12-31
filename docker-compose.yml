@@ -8,15 +8,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "6091:5000"
-    env_file:
-      - ./docker.env
+    env_file: .env.production
     environment:
-      - DATABASE_URL=mysql://user:password@db:3306/websistemajugos
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
     depends_on:
       - db
-    volumes:
-      - ./backend:/app # For development, sync local changes
-      - /app/node_modules # Don't sync local node_modules
     networks:
       - app-network
 
@@ -33,9 +29,6 @@ services:
       - VITE_API_PATH=/api
     depends_on:
       - backend
-    volumes:
-      - ./frontend:/app # For development, sync local changes
-      - /app/node_modules # Don't sync local node_modules
     networks:
       - app-network
 
@@ -43,11 +36,7 @@ services:
     image: mysql:8.0
     ports:
       - "6092:3306"
-    environment:
-      - MYSQL_DATABASE=websistemajugos
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
-      - MYSQL_ROOT_PASSWORD=rootpassword
+    env_file: .env.production
     volumes:
       - db-data:/var/lib/mysql
     networks:
@@ -60,8 +49,9 @@ services:
       - ./backend:/app
     ports:
       - "6093:5555"
+    env_file: .env.production
     environment:
-      - DATABASE_URL=mysql://user:password@db:3306/websistemajugos
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
     command: npx prisma studio --port 5555
     depends_on:
       - db
