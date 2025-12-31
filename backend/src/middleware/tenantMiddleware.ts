@@ -20,18 +20,17 @@ const tenantMiddleware = async (req: Request, res: Response, next: NextFunction)
     }
   }
 
-  const parts = hostname.split('.');
+  const appDomain = process.env.APP_DOMAIN; // e.g., 'jugueria.techinnovats.com'
   let subdomain = null;
 
-  // Logic to extract subdomain, e.g., 'subdomain.localhost' or 'subdomain.example.com'
-  if (parts.length > 1) { 
-      // Avoid using 'www' or the main domain part as a subdomain
-      if (parts[0] !== 'www' && parts[0] !== 'localhost' && parts[0] !== 'jugueria') {
-        subdomain = parts[0];
-      } else if (parts.length > 2 && parts[1] !== 'localhost') {
-        // Handle cases like www.subdomain.example.com (less common for this app)
-        subdomain = parts[1];
-      }
+  if (appDomain && hostname.endsWith(appDomain)) {
+    const potentialSubdomain = hostname.substring(0, hostname.length - appDomain.length -1);
+    // It's a subdomain if it's not empty and not 'www'
+    if (potentialSubdomain && potentialSubdomain !== 'www') {
+        subdomain = potentialSubdomain;
+    }
+  } else if (hostname.endsWith('.localhost')) { // Keep localhost logic
+      subdomain = hostname.replace('.localhost', '');
   }
 
   const tenantSubdomain = subdomain || process.env.DEMO_TENANT_SUBDOMAIN || 'demo';
