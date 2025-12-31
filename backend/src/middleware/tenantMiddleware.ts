@@ -26,7 +26,7 @@ const tenantMiddleware = async (req: Request, res: Response, next: NextFunction)
   // Logic to extract subdomain, e.g., 'subdomain.localhost' or 'subdomain.example.com'
   if (parts.length > 1) { 
       // Avoid using 'www' or the main domain part as a subdomain
-      if (parts[0] !== 'www' && parts[0] !== 'localhost') {
+      if (parts[0] !== 'www' && parts[0] !== 'localhost' && parts[0] !== 'jugueria') {
         subdomain = parts[0];
       } else if (parts.length > 2 && parts[1] !== 'localhost') {
         // Handle cases like www.subdomain.example.com (less common for this app)
