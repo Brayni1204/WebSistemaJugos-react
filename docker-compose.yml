@@ -1,0 +1,76 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "6091:5000"
+    env_file:
+      - ./docker.env
+    environment:
+      - DATABASE_URL=mysql://user:password@db:3306/websistemajugos
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app # For development, sync local changes
+      - /app/node_modules # Don't sync local node_modules
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "6090:80"
+    environment:
+      - VITE_API_PROTOCOL=http
+      - VITE_API_HOST=backend
+      - VITE_API_PORT=5000
+      - VITE_API_PATH=/api
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app # For development, sync local changes
+      - /app/node_modules # Don't sync local node_modules
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "6092:3306"
+    environment:
+      - MYSQL_DATABASE=websistemajugos
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=rootpassword
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+
+  prisma-studio:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "6093:5555"
+    environment:
+      - DATABASE_URL=mysql://user:password@db:3306/websistemajugos
+    command: npx prisma studio --port 5555
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:
