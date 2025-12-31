@@ -8,19 +8,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "6091:5000"
-    # Las variables se cargarán desde el .env en la raíz
     environment:
       - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
       - APP_DOMAIN=${APP_DOMAIN}
-      - JWT_SECRET=${JWT_SECRET}
-      - ALLOWED_PROVISIONING_IPS=${ALLOWED_PROVISIONING_IPS}
-      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
-      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
-      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
-      - RESEND_API_KEY=${RESEND_API_KEY}
-      - EMAIL_FROM=${EMAIL_FROM}
-      - DEMO_TENANT_SUBDOMAIN=${DEMO_TENANT_SUBDOMAIN}
-      - PROVISIONING_API_KEY=${PROVISIONING_API_KEY}
     depends_on:
       - db
     networks:
@@ -32,12 +22,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "6090:80"
-    # Estas variables son para el build de la imagen de frontend
     environment:
-      - VITE_API_PROTOCOL=${VITE_API_PROTOCOL}
-      - VITE_API_HOST=${VITE_API_HOST}
-      - VITE_API_PORT=${VITE_API_PORT}
-      - VITE_API_PATH=${VITE_API_PATH}
+      - VITE_API_PROTOCOL=https
+      - VITE_API_HOST=jugueria.techinnovats.com
+      - VITE_API_PORT=443
+      - VITE_API_PATH=/api
     depends_on:
       - backend
     networks:
@@ -47,7 +36,6 @@ services:
     image: mysql:8.0
     ports:
       - "6092:3306"
-    # Las variables de la base de datos se cargan desde el .env
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
@@ -67,7 +55,7 @@ services:
       - "6093:5555"
     environment:
       - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
-    command: npx prisma studio --port 5555
+    command: sh -c "npx prisma studio --port 5555"
     depends_on:
       - db
     networks:

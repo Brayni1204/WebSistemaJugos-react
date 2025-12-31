@@ -27,12 +27,9 @@ export class ApiError extends Error {
   }
 }
 
-const API_PROTOCOL = import.meta.env.VITE_API_PROTOCOL || 'http';
-const API_HOST = import.meta.env.VITE_API_HOST || 'localhost';
-const API_PORT = import.meta.env.VITE_API_PORT || '5000';
 const API_PATH = import.meta.env.VITE_API_PATH || '/api';
 
-const API_BASE_URL = `${API_PROTOCOL}://${API_HOST}:${API_PORT}${API_PATH}`;
+const API_BASE_URL = API_PATH;
 
 type ApiClientOptions = Omit<RequestInit, 'body'> & {
     body?: any;
