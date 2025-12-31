@@ -1,4 +1,3 @@
-# docker-compose.yml
 version: '3.8'
 
 services:
@@ -8,9 +7,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "6091:5000"
-    env_file: .env.production
+    # CORRECCIÓN 1: Usar el archivo .env local
+    env_file: .env
     environment:
-      - DATABASE_URL=mysql://user:password@db:3306/jugos_tech_prod
+      # CORRECCIÓN 2: Construir la URL dinámicamente usando las variables del .env
+      # Esto asegura que si cambias la contraseña en el .env, se actualice aquí también.
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
     depends_on:
       - db
     networks:
@@ -24,7 +26,7 @@ services:
       - "6090:80"
     environment:
       - VITE_API_PROTOCOL=http
-      - VITE_API_HOST=backend
+      - VITE_API_HOST=backend # Esto está bien, usa el nombre del servicio interno
       - VITE_API_PORT=5000
       - VITE_API_PATH=/api
     depends_on:
@@ -36,7 +38,8 @@ services:
     image: mysql:8.0
     ports:
       - "6092:3306"
-    env_file: .env.production
+    # CORRECCIÓN 1: Usar el archivo .env local
+    env_file: .env
     volumes:
       - db-data:/var/lib/mysql
     networks:
@@ -49,7 +52,8 @@ services:
       - ./backend:/app
     ports:
       - "6093:5555"
-    env_file: .env.production
+    # CORRECCIÓN 1: Usar el archivo .env local
+    env_file: .env
     environment:
       - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
     command: npx prisma studio --port 5555
