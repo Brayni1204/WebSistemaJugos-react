@@ -31,6 +31,7 @@ const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 AND: [
                     { productoId: Number(productoId) },
                     { tenantId },
+                    { status: 'APPROVED' },
                 ],
             },
             include: {
@@ -107,6 +108,7 @@ const store = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 productoId: Number(productoId),
                 userId,
                 tenantId,
+                status: 'PENDING',
             },
         });
         res.status(201).json(newResena);

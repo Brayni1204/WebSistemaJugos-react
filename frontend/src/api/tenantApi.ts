@@ -17,6 +17,8 @@ export interface Tenant {
   mision: string | null;
   vision: string | null;
   delivery_cost: number;
+  logo_url: string | null;
+  favicon_url: string | null;
   social_links: {
     facebook?: string;
     instagram?: string;

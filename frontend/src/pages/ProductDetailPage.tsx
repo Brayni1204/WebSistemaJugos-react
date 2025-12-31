@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { toast } from 'sonner';
-import { getProductById } from '@/api/productsApi';
+import { getPublicProductById } from '@/api/productsApi';
 import { getResenasForProduct, createResena } from '@/api/resenaApi';
 import type { Product } from '@/api/productsApi';
 import type { GetResenasResponse } from '@/api/resenaApi';
@@ -114,7 +114,7 @@ const ProductDetailPage = () => {
             setError(null);
             try {
                 const [fetchedProduct, fetchedReviews] = await Promise.all([
-                    getProductById(productId),
+                    getPublicProductById(productId),
                     getResenasForProduct(productId)
                 ]);
                 setProduct(fetchedProduct);

@@ -323,6 +323,7 @@ export type UserWhereInput = {
   roles?: Prisma.RoleListRelationFilter
   resenas?: Prisma.ResenaListRelationFilter
   cart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
+  pageComments?: Prisma.PageCommentListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -350,6 +351,7 @@ export type UserOrderByWithRelationInput = {
   roles?: Prisma.RoleOrderByRelationAggregateInput
   resenas?: Prisma.ResenaOrderByRelationAggregateInput
   cart?: Prisma.CartOrderByWithRelationInput
+  pageComments?: Prisma.PageCommentOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -382,6 +384,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   roles?: Prisma.RoleListRelationFilter
   resenas?: Prisma.ResenaListRelationFilter
   cart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
+  pageComments?: Prisma.PageCommentListRelationFilter
 }, "id" | "email_tenantId">
 
 export type UserOrderByWithAggregationInput = {
@@ -455,6 +458,7 @@ export type UserCreateInput = {
   roles?: Prisma.RoleCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -481,6 +485,7 @@ export type UserUncheckedCreateInput = {
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -506,6 +511,7 @@ export type UserUpdateInput = {
   roles?: Prisma.RoleUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -532,6 +538,7 @@ export type UserUncheckedUpdateInput = {
   roles?: Prisma.RoleUncheckedUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -600,6 +607,11 @@ export type UserListRelationFilter = {
 
 export type UserOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
 export type UserOrderByRelevanceInput = {
@@ -688,11 +700,6 @@ export type UserNullableScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput | null
 }
 
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
-}
-
 export type UserCreateNestedManyWithoutTenantInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutTenantInput, Prisma.UserUncheckedCreateWithoutTenantInput> | Prisma.UserCreateWithoutTenantInput[] | Prisma.UserUncheckedCreateWithoutTenantInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutTenantInput | Prisma.UserCreateOrConnectWithoutTenantInput[]
@@ -733,6 +740,20 @@ export type UserUncheckedUpdateManyWithoutTenantNestedInput = {
   update?: Prisma.UserUpdateWithWhereUniqueWithoutTenantInput | Prisma.UserUpdateWithWhereUniqueWithoutTenantInput[]
   updateMany?: Prisma.UserUpdateManyWithWhereWithoutTenantInput | Prisma.UserUpdateManyWithWhereWithoutTenantInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutPageCommentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPageCommentsInput, Prisma.UserUncheckedCreateWithoutPageCommentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPageCommentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPageCommentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPageCommentsInput, Prisma.UserUncheckedCreateWithoutPageCommentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPageCommentsInput
+  upsert?: Prisma.UserUpsertWithoutPageCommentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPageCommentsInput, Prisma.UserUpdateWithoutPageCommentsInput>, Prisma.UserUncheckedUpdateWithoutPageCommentsInput>
 }
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -875,6 +896,7 @@ export type UserCreateWithoutTenantInput = {
   roles?: Prisma.RoleCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTenantInput = {
@@ -900,6 +922,7 @@ export type UserUncheckedCreateWithoutTenantInput = {
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTenantInput = {
@@ -951,6 +974,124 @@ export type UserScalarWhereInput = {
   tenantId?: Prisma.IntFilter<"User"> | number
 }
 
+export type UserCreateWithoutPageCommentsInput = {
+  name: string
+  email: string
+  email_verified_at?: Date | string | null
+  verificationCode?: string | null
+  verificationCodeExpiresAt?: Date | string | null
+  password: string
+  pin?: string | null
+  two_factor_secret?: string | null
+  two_factor_recovery_codes?: string | null
+  two_factor_confirmed_at?: Date | string | null
+  remember_token?: string | null
+  is_active?: boolean
+  profile_photo_path?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  cliente?: Prisma.ClienteCreateNestedOneWithoutUserInput
+  pedidos?: Prisma.PedidoCreateNestedManyWithoutUserInput
+  ventas?: Prisma.VentaCreateNestedManyWithoutUserInput
+  roles?: Prisma.RoleCreateNestedManyWithoutUsersInput
+  resenas?: Prisma.ResenaCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPageCommentsInput = {
+  id?: number
+  name: string
+  email: string
+  email_verified_at?: Date | string | null
+  verificationCode?: string | null
+  verificationCodeExpiresAt?: Date | string | null
+  password: string
+  pin?: string | null
+  two_factor_secret?: string | null
+  two_factor_recovery_codes?: string | null
+  two_factor_confirmed_at?: Date | string | null
+  remember_token?: string | null
+  is_active?: boolean
+  profile_photo_path?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  tenantId: number
+  cliente?: Prisma.ClienteUncheckedCreateNestedOneWithoutUserInput
+  pedidos?: Prisma.PedidoUncheckedCreateNestedManyWithoutUserInput
+  ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutUserInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutUsersInput
+  resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPageCommentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPageCommentsInput, Prisma.UserUncheckedCreateWithoutPageCommentsInput>
+}
+
+export type UserUpsertWithoutPageCommentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPageCommentsInput, Prisma.UserUncheckedUpdateWithoutPageCommentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPageCommentsInput, Prisma.UserUncheckedCreateWithoutPageCommentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPageCommentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPageCommentsInput, Prisma.UserUncheckedUpdateWithoutPageCommentsInput>
+}
+
+export type UserUpdateWithoutPageCommentsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verificationCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationCodeExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_secret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_recovery_codes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remember_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  profile_photo_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  cliente?: Prisma.ClienteUpdateOneWithoutUserNestedInput
+  pedidos?: Prisma.PedidoUpdateManyWithoutUserNestedInput
+  ventas?: Prisma.VentaUpdateManyWithoutUserNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutUsersNestedInput
+  resenas?: Prisma.ResenaUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPageCommentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email_verified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verificationCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationCodeExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_secret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_recovery_codes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  two_factor_confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remember_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  profile_photo_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  cliente?: Prisma.ClienteUncheckedUpdateOneWithoutUserNestedInput
+  pedidos?: Prisma.PedidoUncheckedUpdateManyWithoutUserNestedInput
+  ventas?: Prisma.VentaUncheckedUpdateManyWithoutUserNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutUsersNestedInput
+  resenas?: Prisma.ResenaUncheckedUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
+}
+
 export type UserCreateWithoutClienteInput = {
   name: string
   email: string
@@ -973,6 +1114,7 @@ export type UserCreateWithoutClienteInput = {
   roles?: Prisma.RoleCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutClienteInput = {
@@ -998,6 +1140,7 @@ export type UserUncheckedCreateWithoutClienteInput = {
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutClienteInput = {
@@ -1038,6 +1181,7 @@ export type UserUpdateWithoutClienteInput = {
   roles?: Prisma.RoleUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClienteInput = {
@@ -1063,6 +1207,7 @@ export type UserUncheckedUpdateWithoutClienteInput = {
   roles?: Prisma.RoleUncheckedUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutResenasInput = {
@@ -1087,6 +1232,7 @@ export type UserCreateWithoutResenasInput = {
   ventas?: Prisma.VentaCreateNestedManyWithoutUserInput
   roles?: Prisma.RoleCreateNestedManyWithoutUsersInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutResenasInput = {
@@ -1112,6 +1258,7 @@ export type UserUncheckedCreateWithoutResenasInput = {
   ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutUserInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutUsersInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutResenasInput = {
@@ -1152,6 +1299,7 @@ export type UserUpdateWithoutResenasInput = {
   ventas?: Prisma.VentaUpdateManyWithoutUserNestedInput
   roles?: Prisma.RoleUpdateManyWithoutUsersNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResenasInput = {
@@ -1177,6 +1325,7 @@ export type UserUncheckedUpdateWithoutResenasInput = {
   ventas?: Prisma.VentaUncheckedUpdateManyWithoutUserNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutUsersNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCartInput = {
@@ -1201,6 +1350,7 @@ export type UserCreateWithoutCartInput = {
   ventas?: Prisma.VentaCreateNestedManyWithoutUserInput
   roles?: Prisma.RoleCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaCreateNestedManyWithoutUserInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCartInput = {
@@ -1226,6 +1376,7 @@ export type UserUncheckedCreateWithoutCartInput = {
   ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutUserInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutUserInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCartInput = {
@@ -1266,6 +1417,7 @@ export type UserUpdateWithoutCartInput = {
   ventas?: Prisma.VentaUpdateManyWithoutUserNestedInput
   roles?: Prisma.RoleUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUpdateManyWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCartInput = {
@@ -1291,6 +1443,7 @@ export type UserUncheckedUpdateWithoutCartInput = {
   ventas?: Prisma.VentaUncheckedUpdateManyWithoutUserNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUncheckedUpdateManyWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPedidosInput = {
@@ -1315,6 +1468,7 @@ export type UserCreateWithoutPedidosInput = {
   roles?: Prisma.RoleCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPedidosInput = {
@@ -1340,6 +1494,7 @@ export type UserUncheckedCreateWithoutPedidosInput = {
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPedidosInput = {
@@ -1380,6 +1535,7 @@ export type UserUpdateWithoutPedidosInput = {
   roles?: Prisma.RoleUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPedidosInput = {
@@ -1405,6 +1561,7 @@ export type UserUncheckedUpdateWithoutPedidosInput = {
   roles?: Prisma.RoleUncheckedUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVentasInput = {
@@ -1429,6 +1586,7 @@ export type UserCreateWithoutVentasInput = {
   roles?: Prisma.RoleCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVentasInput = {
@@ -1454,6 +1612,7 @@ export type UserUncheckedCreateWithoutVentasInput = {
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutUsersInput
   resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVentasInput = {
@@ -1494,6 +1653,7 @@ export type UserUpdateWithoutVentasInput = {
   roles?: Prisma.RoleUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVentasInput = {
@@ -1519,6 +1679,7 @@ export type UserUncheckedUpdateWithoutVentasInput = {
   roles?: Prisma.RoleUncheckedUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRolesInput = {
@@ -1543,6 +1704,7 @@ export type UserCreateWithoutRolesInput = {
   ventas?: Prisma.VentaCreateNestedManyWithoutUserInput
   resenas?: Prisma.ResenaCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRolesInput = {
@@ -1568,6 +1730,7 @@ export type UserUncheckedCreateWithoutRolesInput = {
   ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutUserInput
   resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRolesInput = {
@@ -1632,6 +1795,7 @@ export type UserUpdateWithoutTenantInput = {
   roles?: Prisma.RoleUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTenantInput = {
@@ -1657,6 +1821,7 @@ export type UserUncheckedUpdateWithoutTenantInput = {
   roles?: Prisma.RoleUncheckedUpdateManyWithoutUsersNestedInput
   resenas?: Prisma.ResenaUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutTenantInput = {
@@ -1700,6 +1865,7 @@ export type UserUpdateWithoutRolesInput = {
   ventas?: Prisma.VentaUpdateManyWithoutUserNestedInput
   resenas?: Prisma.ResenaUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRolesInput = {
@@ -1725,6 +1891,7 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   ventas?: Prisma.VentaUncheckedUpdateManyWithoutUserNestedInput
   resenas?: Prisma.ResenaUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutRolesInput = {
@@ -1757,6 +1924,7 @@ export type UserCountOutputType = {
   ventas: number
   roles: number
   resenas: number
+  pageComments: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1764,6 +1932,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   ventas?: boolean | UserCountOutputTypeCountVentasArgs
   roles?: boolean | UserCountOutputTypeCountRolesArgs
   resenas?: boolean | UserCountOutputTypeCountResenasArgs
+  pageComments?: boolean | UserCountOutputTypeCountPageCommentsArgs
 }
 
 /**
@@ -1804,6 +1973,13 @@ export type UserCountOutputTypeCountResenasArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.ResenaWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPageCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PageCommentWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1830,6 +2006,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   roles?: boolean | Prisma.User$rolesArgs<ExtArgs>
   resenas?: boolean | Prisma.User$resenasArgs<ExtArgs>
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
+  pageComments?: boolean | Prisma.User$pageCommentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1864,6 +2041,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   roles?: boolean | Prisma.User$rolesArgs<ExtArgs>
   resenas?: boolean | Prisma.User$resenasArgs<ExtArgs>
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
+  pageComments?: boolean | Prisma.User$pageCommentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1877,6 +2055,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     roles: Prisma.$RolePayload<ExtArgs>[]
     resenas: Prisma.$ResenaPayload<ExtArgs>[]
     cart: Prisma.$CartPayload<ExtArgs> | null
+    pageComments: Prisma.$PageCommentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2243,6 +2422,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   roles<T extends Prisma.User$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   resenas<T extends Prisma.User$resenasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resenasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResenaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cart<T extends Prisma.User$cartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cartArgs<ExtArgs>>): Prisma.Prisma__CartClient<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  pageComments<T extends Prisma.User$pageCommentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pageCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PageCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2763,6 +2943,30 @@ export type User$cartArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs 
    */
   include?: Prisma.CartInclude<ExtArgs> | null
   where?: Prisma.CartWhereInput
+}
+
+/**
+ * User.pageComments
+ */
+export type User$pageCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PageComment
+   */
+  select?: Prisma.PageCommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PageComment
+   */
+  omit?: Prisma.PageCommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PageCommentInclude<ExtArgs> | null
+  where?: Prisma.PageCommentWhereInput
+  orderBy?: Prisma.PageCommentOrderByWithRelationInput | Prisma.PageCommentOrderByWithRelationInput[]
+  cursor?: Prisma.PageCommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PageCommentScalarFieldEnum | Prisma.PageCommentScalarFieldEnum[]
 }
 
 /**

@@ -432,6 +432,8 @@ export type TenantWhereInput = {
   carts?: Prisma.CartListRelationFilter
   proveedores?: Prisma.ProveedorListRelationFilter
   gastos?: Prisma.GastoListRelationFilter
+  novedades?: Prisma.NovedadListRelationFilter
+  pageComments?: Prisma.PageCommentListRelationFilter
 }
 
 export type TenantOrderByWithRelationInput = {
@@ -488,6 +490,8 @@ export type TenantOrderByWithRelationInput = {
   carts?: Prisma.CartOrderByRelationAggregateInput
   proveedores?: Prisma.ProveedorOrderByRelationAggregateInput
   gastos?: Prisma.GastoOrderByRelationAggregateInput
+  novedades?: Prisma.NovedadOrderByRelationAggregateInput
+  pageComments?: Prisma.PageCommentOrderByRelationAggregateInput
   _relevance?: Prisma.TenantOrderByRelevanceInput
 }
 
@@ -548,6 +552,8 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   carts?: Prisma.CartListRelationFilter
   proveedores?: Prisma.ProveedorListRelationFilter
   gastos?: Prisma.GastoListRelationFilter
+  novedades?: Prisma.NovedadListRelationFilter
+  pageComments?: Prisma.PageCommentListRelationFilter
 }, "id" | "subdomain">
 
 export type TenantOrderByWithAggregationInput = {
@@ -675,6 +681,8 @@ export type TenantCreateInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateInput = {
@@ -731,6 +739,8 @@ export type TenantUncheckedCreateInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUpdateInput = {
@@ -786,6 +796,8 @@ export type TenantUpdateInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateInput = {
@@ -842,6 +854,8 @@ export type TenantUncheckedUpdateInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateManyInput = {
@@ -1096,6 +1110,34 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type TenantCreateNestedOneWithoutNovedadesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutNovedadesInput, Prisma.TenantUncheckedCreateWithoutNovedadesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutNovedadesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutNovedadesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutNovedadesInput, Prisma.TenantUncheckedCreateWithoutNovedadesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutNovedadesInput
+  upsert?: Prisma.TenantUpsertWithoutNovedadesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutNovedadesInput, Prisma.TenantUpdateWithoutNovedadesInput>, Prisma.TenantUncheckedUpdateWithoutNovedadesInput>
+}
+
+export type TenantCreateNestedOneWithoutPageCommentsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutPageCommentsInput, Prisma.TenantUncheckedCreateWithoutPageCommentsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutPageCommentsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutPageCommentsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutPageCommentsInput, Prisma.TenantUncheckedCreateWithoutPageCommentsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutPageCommentsInput
+  upsert?: Prisma.TenantUpsertWithoutPageCommentsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutPageCommentsInput, Prisma.TenantUpdateWithoutPageCommentsInput>, Prisma.TenantUncheckedUpdateWithoutPageCommentsInput>
 }
 
 export type TenantCreateNestedOneWithoutProveedoresInput = {
@@ -1434,6 +1476,490 @@ export type TenantUpdateOneRequiredWithoutRolesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutRolesInput, Prisma.TenantUpdateWithoutRolesInput>, Prisma.TenantUncheckedUpdateWithoutRolesInput>
 }
 
+export type TenantCreateWithoutNovedadesInput = {
+  name: string
+  subdomain: string
+  business_email?: string | null
+  contact_phone?: string | null
+  keywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  description?: string | null
+  theme_color?: string | null
+  theme_secondary_color?: string | null
+  dark_mode_enabled?: boolean
+  address?: string | null
+  about_us?: string | null
+  faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  shipping_policy?: string | null
+  terms_conditions?: string | null
+  social_links?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  logo_url?: string | null
+  favicon_url?: string | null
+  hero_banner_url?: string | null
+  og_image_url?: string | null
+  mision?: string | null
+  vision?: string | null
+  mapa_url?: string | null
+  delivery_cost?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  latitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  status?: $Enums.TenantStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  clientes?: Prisma.ClienteCreateNestedManyWithoutTenantInput
+  categorias?: Prisma.CategoriaCreateNestedManyWithoutTenantInput
+  productos?: Prisma.ProductoCreateNestedManyWithoutTenantInput
+  componentes?: Prisma.ComponenteCreateNestedManyWithoutTenantInput
+  historial_precios?: Prisma.HistorialPrecioCreateNestedManyWithoutTenantInput
+  pedidos?: Prisma.PedidoCreateNestedManyWithoutTenantInput
+  detalle_pedidos?: Prisma.DetallePedidoCreateNestedManyWithoutTenantInput
+  ventas?: Prisma.VentaCreateNestedManyWithoutTenantInput
+  detalle_ventas?: Prisma.DetalleVentaCreateNestedManyWithoutTenantInput
+  mesas?: Prisma.MesaCreateNestedManyWithoutTenantInput
+  estado_pedidos?: Prisma.EstadoPedidoCreateNestedManyWithoutTenantInput
+  pagos?: Prisma.PagoCreateNestedManyWithoutTenantInput
+  direcciones?: Prisma.DireccionCreateNestedManyWithoutTenantInput
+  paginas?: Prisma.PaginaCreateNestedManyWithoutTenantInput
+  subtitulos?: Prisma.SubtituloCreateNestedManyWithoutTenantInput
+  parrafos?: Prisma.ParrafoCreateNestedManyWithoutTenantInput
+  images?: Prisma.ImageCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  empresas?: Prisma.EmpresaCreateNestedManyWithoutTenantInput
+  resenas?: Prisma.ResenaCreateNestedManyWithoutTenantInput
+  carts?: Prisma.CartCreateNestedManyWithoutTenantInput
+  proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
+  gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutNovedadesInput = {
+  id?: number
+  name: string
+  subdomain: string
+  business_email?: string | null
+  contact_phone?: string | null
+  keywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  description?: string | null
+  theme_color?: string | null
+  theme_secondary_color?: string | null
+  dark_mode_enabled?: boolean
+  address?: string | null
+  about_us?: string | null
+  faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  shipping_policy?: string | null
+  terms_conditions?: string | null
+  social_links?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  logo_url?: string | null
+  favicon_url?: string | null
+  hero_banner_url?: string | null
+  og_image_url?: string | null
+  mision?: string | null
+  vision?: string | null
+  mapa_url?: string | null
+  delivery_cost?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  latitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  status?: $Enums.TenantStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  clientes?: Prisma.ClienteUncheckedCreateNestedManyWithoutTenantInput
+  categorias?: Prisma.CategoriaUncheckedCreateNestedManyWithoutTenantInput
+  productos?: Prisma.ProductoUncheckedCreateNestedManyWithoutTenantInput
+  componentes?: Prisma.ComponenteUncheckedCreateNestedManyWithoutTenantInput
+  historial_precios?: Prisma.HistorialPrecioUncheckedCreateNestedManyWithoutTenantInput
+  pedidos?: Prisma.PedidoUncheckedCreateNestedManyWithoutTenantInput
+  detalle_pedidos?: Prisma.DetallePedidoUncheckedCreateNestedManyWithoutTenantInput
+  ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutTenantInput
+  detalle_ventas?: Prisma.DetalleVentaUncheckedCreateNestedManyWithoutTenantInput
+  mesas?: Prisma.MesaUncheckedCreateNestedManyWithoutTenantInput
+  estado_pedidos?: Prisma.EstadoPedidoUncheckedCreateNestedManyWithoutTenantInput
+  pagos?: Prisma.PagoUncheckedCreateNestedManyWithoutTenantInput
+  direcciones?: Prisma.DireccionUncheckedCreateNestedManyWithoutTenantInput
+  paginas?: Prisma.PaginaUncheckedCreateNestedManyWithoutTenantInput
+  subtitulos?: Prisma.SubtituloUncheckedCreateNestedManyWithoutTenantInput
+  parrafos?: Prisma.ParrafoUncheckedCreateNestedManyWithoutTenantInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  empresas?: Prisma.EmpresaUncheckedCreateNestedManyWithoutTenantInput
+  resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutTenantInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
+  proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
+  gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutNovedadesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutNovedadesInput, Prisma.TenantUncheckedCreateWithoutNovedadesInput>
+}
+
+export type TenantUpsertWithoutNovedadesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutNovedadesInput, Prisma.TenantUncheckedUpdateWithoutNovedadesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutNovedadesInput, Prisma.TenantUncheckedCreateWithoutNovedadesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutNovedadesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutNovedadesInput, Prisma.TenantUncheckedUpdateWithoutNovedadesInput>
+}
+
+export type TenantUpdateWithoutNovedadesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain?: Prisma.StringFieldUpdateOperationsInput | string
+  business_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  keywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme_secondary_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dark_mode_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  about_us?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  shipping_policy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms_conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  social_links?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favicon_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hero_banner_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  og_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mapa_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  delivery_cost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  latitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  clientes?: Prisma.ClienteUpdateManyWithoutTenantNestedInput
+  categorias?: Prisma.CategoriaUpdateManyWithoutTenantNestedInput
+  productos?: Prisma.ProductoUpdateManyWithoutTenantNestedInput
+  componentes?: Prisma.ComponenteUpdateManyWithoutTenantNestedInput
+  historial_precios?: Prisma.HistorialPrecioUpdateManyWithoutTenantNestedInput
+  pedidos?: Prisma.PedidoUpdateManyWithoutTenantNestedInput
+  detalle_pedidos?: Prisma.DetallePedidoUpdateManyWithoutTenantNestedInput
+  ventas?: Prisma.VentaUpdateManyWithoutTenantNestedInput
+  detalle_ventas?: Prisma.DetalleVentaUpdateManyWithoutTenantNestedInput
+  mesas?: Prisma.MesaUpdateManyWithoutTenantNestedInput
+  estado_pedidos?: Prisma.EstadoPedidoUpdateManyWithoutTenantNestedInput
+  pagos?: Prisma.PagoUpdateManyWithoutTenantNestedInput
+  direcciones?: Prisma.DireccionUpdateManyWithoutTenantNestedInput
+  paginas?: Prisma.PaginaUpdateManyWithoutTenantNestedInput
+  subtitulos?: Prisma.SubtituloUpdateManyWithoutTenantNestedInput
+  parrafos?: Prisma.ParrafoUpdateManyWithoutTenantNestedInput
+  images?: Prisma.ImageUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  empresas?: Prisma.EmpresaUpdateManyWithoutTenantNestedInput
+  resenas?: Prisma.ResenaUpdateManyWithoutTenantNestedInput
+  carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
+  proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
+  gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutNovedadesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain?: Prisma.StringFieldUpdateOperationsInput | string
+  business_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  keywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme_secondary_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dark_mode_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  about_us?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  shipping_policy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms_conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  social_links?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favicon_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hero_banner_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  og_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mapa_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  delivery_cost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  latitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  clientes?: Prisma.ClienteUncheckedUpdateManyWithoutTenantNestedInput
+  categorias?: Prisma.CategoriaUncheckedUpdateManyWithoutTenantNestedInput
+  productos?: Prisma.ProductoUncheckedUpdateManyWithoutTenantNestedInput
+  componentes?: Prisma.ComponenteUncheckedUpdateManyWithoutTenantNestedInput
+  historial_precios?: Prisma.HistorialPrecioUncheckedUpdateManyWithoutTenantNestedInput
+  pedidos?: Prisma.PedidoUncheckedUpdateManyWithoutTenantNestedInput
+  detalle_pedidos?: Prisma.DetallePedidoUncheckedUpdateManyWithoutTenantNestedInput
+  ventas?: Prisma.VentaUncheckedUpdateManyWithoutTenantNestedInput
+  detalle_ventas?: Prisma.DetalleVentaUncheckedUpdateManyWithoutTenantNestedInput
+  mesas?: Prisma.MesaUncheckedUpdateManyWithoutTenantNestedInput
+  estado_pedidos?: Prisma.EstadoPedidoUncheckedUpdateManyWithoutTenantNestedInput
+  pagos?: Prisma.PagoUncheckedUpdateManyWithoutTenantNestedInput
+  direcciones?: Prisma.DireccionUncheckedUpdateManyWithoutTenantNestedInput
+  paginas?: Prisma.PaginaUncheckedUpdateManyWithoutTenantNestedInput
+  subtitulos?: Prisma.SubtituloUncheckedUpdateManyWithoutTenantNestedInput
+  parrafos?: Prisma.ParrafoUncheckedUpdateManyWithoutTenantNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  empresas?: Prisma.EmpresaUncheckedUpdateManyWithoutTenantNestedInput
+  resenas?: Prisma.ResenaUncheckedUpdateManyWithoutTenantNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
+  proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
+  gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutPageCommentsInput = {
+  name: string
+  subdomain: string
+  business_email?: string | null
+  contact_phone?: string | null
+  keywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  description?: string | null
+  theme_color?: string | null
+  theme_secondary_color?: string | null
+  dark_mode_enabled?: boolean
+  address?: string | null
+  about_us?: string | null
+  faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  shipping_policy?: string | null
+  terms_conditions?: string | null
+  social_links?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  logo_url?: string | null
+  favicon_url?: string | null
+  hero_banner_url?: string | null
+  og_image_url?: string | null
+  mision?: string | null
+  vision?: string | null
+  mapa_url?: string | null
+  delivery_cost?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  latitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  status?: $Enums.TenantStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  clientes?: Prisma.ClienteCreateNestedManyWithoutTenantInput
+  categorias?: Prisma.CategoriaCreateNestedManyWithoutTenantInput
+  productos?: Prisma.ProductoCreateNestedManyWithoutTenantInput
+  componentes?: Prisma.ComponenteCreateNestedManyWithoutTenantInput
+  historial_precios?: Prisma.HistorialPrecioCreateNestedManyWithoutTenantInput
+  pedidos?: Prisma.PedidoCreateNestedManyWithoutTenantInput
+  detalle_pedidos?: Prisma.DetallePedidoCreateNestedManyWithoutTenantInput
+  ventas?: Prisma.VentaCreateNestedManyWithoutTenantInput
+  detalle_ventas?: Prisma.DetalleVentaCreateNestedManyWithoutTenantInput
+  mesas?: Prisma.MesaCreateNestedManyWithoutTenantInput
+  estado_pedidos?: Prisma.EstadoPedidoCreateNestedManyWithoutTenantInput
+  pagos?: Prisma.PagoCreateNestedManyWithoutTenantInput
+  direcciones?: Prisma.DireccionCreateNestedManyWithoutTenantInput
+  paginas?: Prisma.PaginaCreateNestedManyWithoutTenantInput
+  subtitulos?: Prisma.SubtituloCreateNestedManyWithoutTenantInput
+  parrafos?: Prisma.ParrafoCreateNestedManyWithoutTenantInput
+  images?: Prisma.ImageCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  empresas?: Prisma.EmpresaCreateNestedManyWithoutTenantInput
+  resenas?: Prisma.ResenaCreateNestedManyWithoutTenantInput
+  carts?: Prisma.CartCreateNestedManyWithoutTenantInput
+  proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
+  gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutPageCommentsInput = {
+  id?: number
+  name: string
+  subdomain: string
+  business_email?: string | null
+  contact_phone?: string | null
+  keywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  description?: string | null
+  theme_color?: string | null
+  theme_secondary_color?: string | null
+  dark_mode_enabled?: boolean
+  address?: string | null
+  about_us?: string | null
+  faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  shipping_policy?: string | null
+  terms_conditions?: string | null
+  social_links?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  logo_url?: string | null
+  favicon_url?: string | null
+  hero_banner_url?: string | null
+  og_image_url?: string | null
+  mision?: string | null
+  vision?: string | null
+  mapa_url?: string | null
+  delivery_cost?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  latitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  status?: $Enums.TenantStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  clientes?: Prisma.ClienteUncheckedCreateNestedManyWithoutTenantInput
+  categorias?: Prisma.CategoriaUncheckedCreateNestedManyWithoutTenantInput
+  productos?: Prisma.ProductoUncheckedCreateNestedManyWithoutTenantInput
+  componentes?: Prisma.ComponenteUncheckedCreateNestedManyWithoutTenantInput
+  historial_precios?: Prisma.HistorialPrecioUncheckedCreateNestedManyWithoutTenantInput
+  pedidos?: Prisma.PedidoUncheckedCreateNestedManyWithoutTenantInput
+  detalle_pedidos?: Prisma.DetallePedidoUncheckedCreateNestedManyWithoutTenantInput
+  ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutTenantInput
+  detalle_ventas?: Prisma.DetalleVentaUncheckedCreateNestedManyWithoutTenantInput
+  mesas?: Prisma.MesaUncheckedCreateNestedManyWithoutTenantInput
+  estado_pedidos?: Prisma.EstadoPedidoUncheckedCreateNestedManyWithoutTenantInput
+  pagos?: Prisma.PagoUncheckedCreateNestedManyWithoutTenantInput
+  direcciones?: Prisma.DireccionUncheckedCreateNestedManyWithoutTenantInput
+  paginas?: Prisma.PaginaUncheckedCreateNestedManyWithoutTenantInput
+  subtitulos?: Prisma.SubtituloUncheckedCreateNestedManyWithoutTenantInput
+  parrafos?: Prisma.ParrafoUncheckedCreateNestedManyWithoutTenantInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  empresas?: Prisma.EmpresaUncheckedCreateNestedManyWithoutTenantInput
+  resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutTenantInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
+  proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
+  gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutPageCommentsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutPageCommentsInput, Prisma.TenantUncheckedCreateWithoutPageCommentsInput>
+}
+
+export type TenantUpsertWithoutPageCommentsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutPageCommentsInput, Prisma.TenantUncheckedUpdateWithoutPageCommentsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutPageCommentsInput, Prisma.TenantUncheckedCreateWithoutPageCommentsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutPageCommentsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutPageCommentsInput, Prisma.TenantUncheckedUpdateWithoutPageCommentsInput>
+}
+
+export type TenantUpdateWithoutPageCommentsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain?: Prisma.StringFieldUpdateOperationsInput | string
+  business_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  keywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme_secondary_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dark_mode_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  about_us?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  shipping_policy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms_conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  social_links?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favicon_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hero_banner_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  og_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mapa_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  delivery_cost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  latitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  clientes?: Prisma.ClienteUpdateManyWithoutTenantNestedInput
+  categorias?: Prisma.CategoriaUpdateManyWithoutTenantNestedInput
+  productos?: Prisma.ProductoUpdateManyWithoutTenantNestedInput
+  componentes?: Prisma.ComponenteUpdateManyWithoutTenantNestedInput
+  historial_precios?: Prisma.HistorialPrecioUpdateManyWithoutTenantNestedInput
+  pedidos?: Prisma.PedidoUpdateManyWithoutTenantNestedInput
+  detalle_pedidos?: Prisma.DetallePedidoUpdateManyWithoutTenantNestedInput
+  ventas?: Prisma.VentaUpdateManyWithoutTenantNestedInput
+  detalle_ventas?: Prisma.DetalleVentaUpdateManyWithoutTenantNestedInput
+  mesas?: Prisma.MesaUpdateManyWithoutTenantNestedInput
+  estado_pedidos?: Prisma.EstadoPedidoUpdateManyWithoutTenantNestedInput
+  pagos?: Prisma.PagoUpdateManyWithoutTenantNestedInput
+  direcciones?: Prisma.DireccionUpdateManyWithoutTenantNestedInput
+  paginas?: Prisma.PaginaUpdateManyWithoutTenantNestedInput
+  subtitulos?: Prisma.SubtituloUpdateManyWithoutTenantNestedInput
+  parrafos?: Prisma.ParrafoUpdateManyWithoutTenantNestedInput
+  images?: Prisma.ImageUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  empresas?: Prisma.EmpresaUpdateManyWithoutTenantNestedInput
+  resenas?: Prisma.ResenaUpdateManyWithoutTenantNestedInput
+  carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
+  proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
+  gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutPageCommentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain?: Prisma.StringFieldUpdateOperationsInput | string
+  business_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  keywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  theme_secondary_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dark_mode_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  about_us?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  shipping_policy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms_conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  social_links?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favicon_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hero_banner_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  og_image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mapa_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  delivery_cost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  latitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitud?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  clientes?: Prisma.ClienteUncheckedUpdateManyWithoutTenantNestedInput
+  categorias?: Prisma.CategoriaUncheckedUpdateManyWithoutTenantNestedInput
+  productos?: Prisma.ProductoUncheckedUpdateManyWithoutTenantNestedInput
+  componentes?: Prisma.ComponenteUncheckedUpdateManyWithoutTenantNestedInput
+  historial_precios?: Prisma.HistorialPrecioUncheckedUpdateManyWithoutTenantNestedInput
+  pedidos?: Prisma.PedidoUncheckedUpdateManyWithoutTenantNestedInput
+  detalle_pedidos?: Prisma.DetallePedidoUncheckedUpdateManyWithoutTenantNestedInput
+  ventas?: Prisma.VentaUncheckedUpdateManyWithoutTenantNestedInput
+  detalle_ventas?: Prisma.DetalleVentaUncheckedUpdateManyWithoutTenantNestedInput
+  mesas?: Prisma.MesaUncheckedUpdateManyWithoutTenantNestedInput
+  estado_pedidos?: Prisma.EstadoPedidoUncheckedUpdateManyWithoutTenantNestedInput
+  pagos?: Prisma.PagoUncheckedUpdateManyWithoutTenantNestedInput
+  direcciones?: Prisma.DireccionUncheckedUpdateManyWithoutTenantNestedInput
+  paginas?: Prisma.PaginaUncheckedUpdateManyWithoutTenantNestedInput
+  subtitulos?: Prisma.SubtituloUncheckedUpdateManyWithoutTenantNestedInput
+  parrafos?: Prisma.ParrafoUncheckedUpdateManyWithoutTenantNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  empresas?: Prisma.EmpresaUncheckedUpdateManyWithoutTenantNestedInput
+  resenas?: Prisma.ResenaUncheckedUpdateManyWithoutTenantNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
+  proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
+  gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+}
+
 export type TenantCreateWithoutProveedoresInput = {
   name: string
   subdomain: string
@@ -1486,6 +2012,8 @@ export type TenantCreateWithoutProveedoresInput = {
   resenas?: Prisma.ResenaCreateNestedManyWithoutTenantInput
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutProveedoresInput = {
@@ -1541,6 +2069,8 @@ export type TenantUncheckedCreateWithoutProveedoresInput = {
   resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutTenantInput
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutProveedoresInput = {
@@ -1611,6 +2141,8 @@ export type TenantUpdateWithoutProveedoresInput = {
   resenas?: Prisma.ResenaUpdateManyWithoutTenantNestedInput
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutProveedoresInput = {
@@ -1666,6 +2198,8 @@ export type TenantUncheckedUpdateWithoutProveedoresInput = {
   resenas?: Prisma.ResenaUncheckedUpdateManyWithoutTenantNestedInput
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutGastosInput = {
@@ -1720,6 +2254,8 @@ export type TenantCreateWithoutGastosInput = {
   resenas?: Prisma.ResenaCreateNestedManyWithoutTenantInput
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutGastosInput = {
@@ -1775,6 +2311,8 @@ export type TenantUncheckedCreateWithoutGastosInput = {
   resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutTenantInput
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutGastosInput = {
@@ -1845,6 +2383,8 @@ export type TenantUpdateWithoutGastosInput = {
   resenas?: Prisma.ResenaUpdateManyWithoutTenantNestedInput
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutGastosInput = {
@@ -1900,6 +2440,8 @@ export type TenantUncheckedUpdateWithoutGastosInput = {
   resenas?: Prisma.ResenaUncheckedUpdateManyWithoutTenantNestedInput
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutEmpresasInput = {
@@ -1954,6 +2496,8 @@ export type TenantCreateWithoutEmpresasInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutEmpresasInput = {
@@ -2009,6 +2553,8 @@ export type TenantUncheckedCreateWithoutEmpresasInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutEmpresasInput = {
@@ -2079,6 +2625,8 @@ export type TenantUpdateWithoutEmpresasInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutEmpresasInput = {
@@ -2134,6 +2682,8 @@ export type TenantUncheckedUpdateWithoutEmpresasInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutUsersInput = {
@@ -2188,6 +2738,8 @@ export type TenantCreateWithoutUsersInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutUsersInput = {
@@ -2243,6 +2795,8 @@ export type TenantUncheckedCreateWithoutUsersInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutUsersInput = {
@@ -2313,6 +2867,8 @@ export type TenantUpdateWithoutUsersInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutUsersInput = {
@@ -2368,6 +2924,8 @@ export type TenantUncheckedUpdateWithoutUsersInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutClientesInput = {
@@ -2422,6 +2980,8 @@ export type TenantCreateWithoutClientesInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutClientesInput = {
@@ -2477,6 +3037,8 @@ export type TenantUncheckedCreateWithoutClientesInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutClientesInput = {
@@ -2547,6 +3109,8 @@ export type TenantUpdateWithoutClientesInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutClientesInput = {
@@ -2602,6 +3166,8 @@ export type TenantUncheckedUpdateWithoutClientesInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutCategoriasInput = {
@@ -2656,6 +3222,8 @@ export type TenantCreateWithoutCategoriasInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutCategoriasInput = {
@@ -2711,6 +3279,8 @@ export type TenantUncheckedCreateWithoutCategoriasInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutCategoriasInput = {
@@ -2781,6 +3351,8 @@ export type TenantUpdateWithoutCategoriasInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutCategoriasInput = {
@@ -2836,6 +3408,8 @@ export type TenantUncheckedUpdateWithoutCategoriasInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutProductosInput = {
@@ -2890,6 +3464,8 @@ export type TenantCreateWithoutProductosInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutProductosInput = {
@@ -2945,6 +3521,8 @@ export type TenantUncheckedCreateWithoutProductosInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutProductosInput = {
@@ -3015,6 +3593,8 @@ export type TenantUpdateWithoutProductosInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutProductosInput = {
@@ -3070,6 +3650,8 @@ export type TenantUncheckedUpdateWithoutProductosInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutComponentesInput = {
@@ -3124,6 +3706,8 @@ export type TenantCreateWithoutComponentesInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutComponentesInput = {
@@ -3179,6 +3763,8 @@ export type TenantUncheckedCreateWithoutComponentesInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutComponentesInput = {
@@ -3249,6 +3835,8 @@ export type TenantUpdateWithoutComponentesInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutComponentesInput = {
@@ -3304,6 +3892,8 @@ export type TenantUncheckedUpdateWithoutComponentesInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutResenasInput = {
@@ -3358,6 +3948,8 @@ export type TenantCreateWithoutResenasInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutResenasInput = {
@@ -3413,6 +4005,8 @@ export type TenantUncheckedCreateWithoutResenasInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutResenasInput = {
@@ -3483,6 +4077,8 @@ export type TenantUpdateWithoutResenasInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutResenasInput = {
@@ -3538,6 +4134,8 @@ export type TenantUncheckedUpdateWithoutResenasInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutCartsInput = {
@@ -3592,6 +4190,8 @@ export type TenantCreateWithoutCartsInput = {
   resenas?: Prisma.ResenaCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutCartsInput = {
@@ -3647,6 +4247,8 @@ export type TenantUncheckedCreateWithoutCartsInput = {
   resenas?: Prisma.ResenaUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutCartsInput = {
@@ -3717,6 +4319,8 @@ export type TenantUpdateWithoutCartsInput = {
   resenas?: Prisma.ResenaUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutCartsInput = {
@@ -3772,6 +4376,8 @@ export type TenantUncheckedUpdateWithoutCartsInput = {
   resenas?: Prisma.ResenaUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutHistorial_preciosInput = {
@@ -3826,6 +4432,8 @@ export type TenantCreateWithoutHistorial_preciosInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutHistorial_preciosInput = {
@@ -3881,6 +4489,8 @@ export type TenantUncheckedCreateWithoutHistorial_preciosInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutHistorial_preciosInput = {
@@ -3951,6 +4561,8 @@ export type TenantUpdateWithoutHistorial_preciosInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutHistorial_preciosInput = {
@@ -4006,6 +4618,8 @@ export type TenantUncheckedUpdateWithoutHistorial_preciosInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPedidosInput = {
@@ -4060,6 +4674,8 @@ export type TenantCreateWithoutPedidosInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutPedidosInput = {
@@ -4115,6 +4731,8 @@ export type TenantUncheckedCreateWithoutPedidosInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutPedidosInput = {
@@ -4185,6 +4803,8 @@ export type TenantUpdateWithoutPedidosInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutPedidosInput = {
@@ -4240,6 +4860,8 @@ export type TenantUncheckedUpdateWithoutPedidosInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutDetalle_pedidosInput = {
@@ -4294,6 +4916,8 @@ export type TenantCreateWithoutDetalle_pedidosInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutDetalle_pedidosInput = {
@@ -4349,6 +4973,8 @@ export type TenantUncheckedCreateWithoutDetalle_pedidosInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutDetalle_pedidosInput = {
@@ -4419,6 +5045,8 @@ export type TenantUpdateWithoutDetalle_pedidosInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutDetalle_pedidosInput = {
@@ -4474,6 +5102,8 @@ export type TenantUncheckedUpdateWithoutDetalle_pedidosInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutVentasInput = {
@@ -4528,6 +5158,8 @@ export type TenantCreateWithoutVentasInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutVentasInput = {
@@ -4583,6 +5215,8 @@ export type TenantUncheckedCreateWithoutVentasInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutVentasInput = {
@@ -4653,6 +5287,8 @@ export type TenantUpdateWithoutVentasInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutVentasInput = {
@@ -4708,6 +5344,8 @@ export type TenantUncheckedUpdateWithoutVentasInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutDetalle_ventasInput = {
@@ -4762,6 +5400,8 @@ export type TenantCreateWithoutDetalle_ventasInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutDetalle_ventasInput = {
@@ -4817,6 +5457,8 @@ export type TenantUncheckedCreateWithoutDetalle_ventasInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutDetalle_ventasInput = {
@@ -4887,6 +5529,8 @@ export type TenantUpdateWithoutDetalle_ventasInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutDetalle_ventasInput = {
@@ -4942,6 +5586,8 @@ export type TenantUncheckedUpdateWithoutDetalle_ventasInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutMesasInput = {
@@ -4996,6 +5642,8 @@ export type TenantCreateWithoutMesasInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutMesasInput = {
@@ -5051,6 +5699,8 @@ export type TenantUncheckedCreateWithoutMesasInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutMesasInput = {
@@ -5121,6 +5771,8 @@ export type TenantUpdateWithoutMesasInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutMesasInput = {
@@ -5176,6 +5828,8 @@ export type TenantUncheckedUpdateWithoutMesasInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutEstado_pedidosInput = {
@@ -5230,6 +5884,8 @@ export type TenantCreateWithoutEstado_pedidosInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutEstado_pedidosInput = {
@@ -5285,6 +5941,8 @@ export type TenantUncheckedCreateWithoutEstado_pedidosInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutEstado_pedidosInput = {
@@ -5355,6 +6013,8 @@ export type TenantUpdateWithoutEstado_pedidosInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutEstado_pedidosInput = {
@@ -5410,6 +6070,8 @@ export type TenantUncheckedUpdateWithoutEstado_pedidosInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPagosInput = {
@@ -5464,6 +6126,8 @@ export type TenantCreateWithoutPagosInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutPagosInput = {
@@ -5519,6 +6183,8 @@ export type TenantUncheckedCreateWithoutPagosInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutPagosInput = {
@@ -5589,6 +6255,8 @@ export type TenantUpdateWithoutPagosInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutPagosInput = {
@@ -5644,6 +6312,8 @@ export type TenantUncheckedUpdateWithoutPagosInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutDireccionesInput = {
@@ -5698,6 +6368,8 @@ export type TenantCreateWithoutDireccionesInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutDireccionesInput = {
@@ -5753,6 +6425,8 @@ export type TenantUncheckedCreateWithoutDireccionesInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutDireccionesInput = {
@@ -5823,6 +6497,8 @@ export type TenantUpdateWithoutDireccionesInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutDireccionesInput = {
@@ -5878,6 +6554,8 @@ export type TenantUncheckedUpdateWithoutDireccionesInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPaginasInput = {
@@ -5932,6 +6610,8 @@ export type TenantCreateWithoutPaginasInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutPaginasInput = {
@@ -5987,6 +6667,8 @@ export type TenantUncheckedCreateWithoutPaginasInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutPaginasInput = {
@@ -6057,6 +6739,8 @@ export type TenantUpdateWithoutPaginasInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutPaginasInput = {
@@ -6112,6 +6796,8 @@ export type TenantUncheckedUpdateWithoutPaginasInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSubtitulosInput = {
@@ -6166,6 +6852,8 @@ export type TenantCreateWithoutSubtitulosInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSubtitulosInput = {
@@ -6221,6 +6909,8 @@ export type TenantUncheckedCreateWithoutSubtitulosInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSubtitulosInput = {
@@ -6291,6 +6981,8 @@ export type TenantUpdateWithoutSubtitulosInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSubtitulosInput = {
@@ -6346,6 +7038,8 @@ export type TenantUncheckedUpdateWithoutSubtitulosInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutParrafosInput = {
@@ -6400,6 +7094,8 @@ export type TenantCreateWithoutParrafosInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutParrafosInput = {
@@ -6455,6 +7151,8 @@ export type TenantUncheckedCreateWithoutParrafosInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutParrafosInput = {
@@ -6525,6 +7223,8 @@ export type TenantUpdateWithoutParrafosInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutParrafosInput = {
@@ -6580,6 +7280,8 @@ export type TenantUncheckedUpdateWithoutParrafosInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutImagesInput = {
@@ -6634,6 +7336,8 @@ export type TenantCreateWithoutImagesInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutImagesInput = {
@@ -6689,6 +7393,8 @@ export type TenantUncheckedCreateWithoutImagesInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutImagesInput = {
@@ -6759,6 +7465,8 @@ export type TenantUpdateWithoutImagesInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutImagesInput = {
@@ -6814,6 +7522,8 @@ export type TenantUncheckedUpdateWithoutImagesInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutRolesInput = {
@@ -6868,6 +7578,8 @@ export type TenantCreateWithoutRolesInput = {
   carts?: Prisma.CartCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutRolesInput = {
@@ -6923,6 +7635,8 @@ export type TenantUncheckedCreateWithoutRolesInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutTenantInput
   proveedores?: Prisma.ProveedorUncheckedCreateNestedManyWithoutTenantInput
   gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutTenantInput
+  novedades?: Prisma.NovedadUncheckedCreateNestedManyWithoutTenantInput
+  pageComments?: Prisma.PageCommentUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutRolesInput = {
@@ -6993,6 +7707,8 @@ export type TenantUpdateWithoutRolesInput = {
   carts?: Prisma.CartUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutRolesInput = {
@@ -7048,6 +7764,8 @@ export type TenantUncheckedUpdateWithoutRolesInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutTenantNestedInput
   proveedores?: Prisma.ProveedorUncheckedUpdateManyWithoutTenantNestedInput
   gastos?: Prisma.GastoUncheckedUpdateManyWithoutTenantNestedInput
+  novedades?: Prisma.NovedadUncheckedUpdateManyWithoutTenantNestedInput
+  pageComments?: Prisma.PageCommentUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 
@@ -7080,6 +7798,8 @@ export type TenantCountOutputType = {
   carts: number
   proveedores: number
   gastos: number
+  novedades: number
+  pageComments: number
 }
 
 export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7107,6 +7827,8 @@ export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   carts?: boolean | TenantCountOutputTypeCountCartsArgs
   proveedores?: boolean | TenantCountOutputTypeCountProveedoresArgs
   gastos?: boolean | TenantCountOutputTypeCountGastosArgs
+  novedades?: boolean | TenantCountOutputTypeCountNovedadesArgs
+  pageComments?: boolean | TenantCountOutputTypeCountPageCommentsArgs
 }
 
 /**
@@ -7287,6 +8009,20 @@ export type TenantCountOutputTypeCountGastosArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.GastoWhereInput
 }
 
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountNovedadesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NovedadWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountPageCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PageCommentWhereInput
+}
+
 
 export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -7342,6 +8078,8 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   carts?: boolean | Prisma.Tenant$cartsArgs<ExtArgs>
   proveedores?: boolean | Prisma.Tenant$proveedoresArgs<ExtArgs>
   gastos?: boolean | Prisma.Tenant$gastosArgs<ExtArgs>
+  novedades?: boolean | Prisma.Tenant$novedadesArgs<ExtArgs>
+  pageComments?: boolean | Prisma.Tenant$pageCommentsArgs<ExtArgs>
   _count?: boolean | Prisma.TenantCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tenant"]>
 
@@ -7405,6 +8143,8 @@ export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   carts?: boolean | Prisma.Tenant$cartsArgs<ExtArgs>
   proveedores?: boolean | Prisma.Tenant$proveedoresArgs<ExtArgs>
   gastos?: boolean | Prisma.Tenant$gastosArgs<ExtArgs>
+  novedades?: boolean | Prisma.Tenant$novedadesArgs<ExtArgs>
+  pageComments?: boolean | Prisma.Tenant$pageCommentsArgs<ExtArgs>
   _count?: boolean | Prisma.TenantCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -7435,6 +8175,8 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     carts: Prisma.$CartPayload<ExtArgs>[]
     proveedores: Prisma.$ProveedorPayload<ExtArgs>[]
     gastos: Prisma.$GastoPayload<ExtArgs>[]
+    novedades: Prisma.$NovedadPayload<ExtArgs>[]
+    pageComments: Prisma.$PageCommentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -7830,6 +8572,8 @@ export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.T
   carts<T extends Prisma.Tenant$cartsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$cartsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   proveedores<T extends Prisma.Tenant$proveedoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$proveedoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProveedorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   gastos<T extends Prisma.Tenant$gastosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$gastosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GastoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  novedades<T extends Prisma.Tenant$novedadesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$novedadesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NovedadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pageComments<T extends Prisma.Tenant$pageCommentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$pageCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PageCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8804,6 +9548,54 @@ export type Tenant$gastosArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.GastoScalarFieldEnum | Prisma.GastoScalarFieldEnum[]
+}
+
+/**
+ * Tenant.novedades
+ */
+export type Tenant$novedadesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Novedad
+   */
+  select?: Prisma.NovedadSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Novedad
+   */
+  omit?: Prisma.NovedadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NovedadInclude<ExtArgs> | null
+  where?: Prisma.NovedadWhereInput
+  orderBy?: Prisma.NovedadOrderByWithRelationInput | Prisma.NovedadOrderByWithRelationInput[]
+  cursor?: Prisma.NovedadWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NovedadScalarFieldEnum | Prisma.NovedadScalarFieldEnum[]
+}
+
+/**
+ * Tenant.pageComments
+ */
+export type Tenant$pageCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PageComment
+   */
+  select?: Prisma.PageCommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PageComment
+   */
+  omit?: Prisma.PageCommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PageCommentInclude<ExtArgs> | null
+  where?: Prisma.PageCommentWhereInput
+  orderBy?: Prisma.PageCommentOrderByWithRelationInput | Prisma.PageCommentOrderByWithRelationInput[]
+  cursor?: Prisma.PageCommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PageCommentScalarFieldEnum | Prisma.PageCommentScalarFieldEnum[]
 }
 
 /**

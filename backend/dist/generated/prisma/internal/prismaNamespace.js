@@ -48,8 +48,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JsonNullValueFilter = exports.NullableJsonNullValueInput = exports.SortOrder = exports.PermissionScalarFieldEnum = exports.RoleScalarFieldEnum = exports.ImageScalarFieldEnum = exports.ParrafoScalarFieldEnum = exports.SubtituloScalarFieldEnum = exports.PaginaScalarFieldEnum = exports.DireccionScalarFieldEnum = exports.PagoScalarFieldEnum = exports.EstadoPedidoScalarFieldEnum = exports.MesaScalarFieldEnum = exports.DetalleVentaScalarFieldEnum = exports.VentaScalarFieldEnum = exports.DetallePedidoScalarFieldEnum = exports.PedidoScalarFieldEnum = exports.HistorialPrecioScalarFieldEnum = exports.CartItemScalarFieldEnum = exports.CartScalarFieldEnum = exports.ResenaScalarFieldEnum = exports.ComponenteScalarFieldEnum = exports.ProductoScalarFieldEnum = exports.CategoriaScalarFieldEnum = exports.ClienteScalarFieldEnum = exports.UserScalarFieldEnum = exports.EmpresaScalarFieldEnum = exports.DetalleGastoScalarFieldEnum = exports.GastoScalarFieldEnum = exports.ProveedorScalarFieldEnum = exports.TenantScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
-exports.defineExtension = exports.PermissionOrderByRelevanceFieldEnum = exports.RoleOrderByRelevanceFieldEnum = exports.ImageOrderByRelevanceFieldEnum = exports.ParrafoOrderByRelevanceFieldEnum = exports.SubtituloOrderByRelevanceFieldEnum = exports.PaginaOrderByRelevanceFieldEnum = exports.DireccionOrderByRelevanceFieldEnum = exports.EstadoPedidoOrderByRelevanceFieldEnum = exports.MesaOrderByRelevanceFieldEnum = exports.DetalleVentaOrderByRelevanceFieldEnum = exports.VentaOrderByRelevanceFieldEnum = exports.DetallePedidoOrderByRelevanceFieldEnum = exports.PedidoOrderByRelevanceFieldEnum = exports.ResenaOrderByRelevanceFieldEnum = exports.ComponenteOrderByRelevanceFieldEnum = exports.ProductoOrderByRelevanceFieldEnum = exports.CategoriaOrderByRelevanceFieldEnum = exports.ClienteOrderByRelevanceFieldEnum = exports.UserOrderByRelevanceFieldEnum = exports.EmpresaOrderByRelevanceFieldEnum = exports.DetalleGastoOrderByRelevanceFieldEnum = exports.ProveedorOrderByRelevanceFieldEnum = exports.TenantOrderByRelevanceFieldEnum = exports.NullsOrder = exports.QueryMode = void 0;
+exports.SortOrder = exports.PermissionScalarFieldEnum = exports.RoleScalarFieldEnum = exports.ImageScalarFieldEnum = exports.ParrafoScalarFieldEnum = exports.SubtituloScalarFieldEnum = exports.PaginaScalarFieldEnum = exports.DireccionScalarFieldEnum = exports.PagoScalarFieldEnum = exports.EstadoPedidoScalarFieldEnum = exports.MesaScalarFieldEnum = exports.DetalleVentaScalarFieldEnum = exports.VentaScalarFieldEnum = exports.DetallePedidoScalarFieldEnum = exports.PedidoScalarFieldEnum = exports.HistorialPrecioScalarFieldEnum = exports.CartItemScalarFieldEnum = exports.CartScalarFieldEnum = exports.ResenaScalarFieldEnum = exports.ComponenteScalarFieldEnum = exports.ProductoScalarFieldEnum = exports.CategoriaScalarFieldEnum = exports.ClienteScalarFieldEnum = exports.UserScalarFieldEnum = exports.EmpresaScalarFieldEnum = exports.DetalleGastoScalarFieldEnum = exports.GastoScalarFieldEnum = exports.ProveedorScalarFieldEnum = exports.PageCommentScalarFieldEnum = exports.NovedadScalarFieldEnum = exports.TenantScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.PermissionOrderByRelevanceFieldEnum = exports.RoleOrderByRelevanceFieldEnum = exports.ImageOrderByRelevanceFieldEnum = exports.ParrafoOrderByRelevanceFieldEnum = exports.SubtituloOrderByRelevanceFieldEnum = exports.PaginaOrderByRelevanceFieldEnum = exports.DireccionOrderByRelevanceFieldEnum = exports.EstadoPedidoOrderByRelevanceFieldEnum = exports.MesaOrderByRelevanceFieldEnum = exports.DetalleVentaOrderByRelevanceFieldEnum = exports.VentaOrderByRelevanceFieldEnum = exports.DetallePedidoOrderByRelevanceFieldEnum = exports.PedidoOrderByRelevanceFieldEnum = exports.ResenaOrderByRelevanceFieldEnum = exports.ComponenteOrderByRelevanceFieldEnum = exports.ProductoOrderByRelevanceFieldEnum = exports.CategoriaOrderByRelevanceFieldEnum = exports.ClienteOrderByRelevanceFieldEnum = exports.UserOrderByRelevanceFieldEnum = exports.EmpresaOrderByRelevanceFieldEnum = exports.DetalleGastoOrderByRelevanceFieldEnum = exports.ProveedorOrderByRelevanceFieldEnum = exports.PageCommentOrderByRelevanceFieldEnum = exports.NovedadOrderByRelevanceFieldEnum = exports.TenantOrderByRelevanceFieldEnum = exports.NullsOrder = exports.QueryMode = exports.JsonNullValueFilter = exports.NullableJsonNullValueInput = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/library"));
 /**
  * Prisma Errors
@@ -105,6 +105,8 @@ exports.JsonNull = runtime.objectEnumValues.instances.JsonNull;
 exports.AnyNull = runtime.objectEnumValues.instances.AnyNull;
 exports.ModelName = {
     Tenant: 'Tenant',
+    Novedad: 'Novedad',
+    PageComment: 'PageComment',
     Proveedor: 'Proveedor',
     Gasto: 'Gasto',
     DetalleGasto: 'DetalleGasto',
@@ -172,6 +174,28 @@ exports.TenantScalarFieldEnum = {
     status: 'status',
     created_at: 'created_at',
     updated_at: 'updated_at'
+};
+exports.NovedadScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    content: 'content',
+    imageUrl: 'imageUrl',
+    published: 'published',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    tenantId: 'tenantId'
+};
+exports.PageCommentScalarFieldEnum = {
+    id: 'id',
+    content: 'content',
+    pageType: 'pageType',
+    pageId: 'pageId',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId',
+    tenantId: 'tenantId',
+    parentId: 'parentId'
 };
 exports.ProveedorScalarFieldEnum = {
     id: 'id',
@@ -276,6 +300,7 @@ exports.ResenaScalarFieldEnum = {
     id: 'id',
     rating: 'rating',
     comment: 'comment',
+    status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     productoId: 'productoId',
@@ -493,6 +518,15 @@ exports.TenantOrderByRelevanceFieldEnum = {
     mision: 'mision',
     vision: 'vision',
     mapa_url: 'mapa_url'
+};
+exports.NovedadOrderByRelevanceFieldEnum = {
+    title: 'title',
+    content: 'content',
+    imageUrl: 'imageUrl'
+};
+exports.PageCommentOrderByRelevanceFieldEnum = {
+    content: 'content',
+    pageType: 'pageType'
 };
 exports.ProveedorOrderByRelevanceFieldEnum = {
     name: 'name',

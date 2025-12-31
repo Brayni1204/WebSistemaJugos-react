@@ -1,6 +1,6 @@
 // src/pages/admin/AdminLayout.tsx
 import { Outlet, Link, NavLink } from 'react-router-dom';
-import { LogOut, Menu, X, Home, ShoppingCart, Tag, Box, Coffee, Settings, Users, Truck, ShoppingBasket, MessageSquare } from 'lucide-react';
+import { LogOut, Menu, X, Home, ShoppingCart, Tag, Box, Coffee, Settings, Users, Truck, ShoppingBasket, MessageSquare, Newspaper, MessagesSquare } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useAdminAuth } from '@/contexts/AdminAuthContext';
 
@@ -53,6 +53,12 @@ const AdminLayout = () => {
               Productos
             </NavLink>
           )}
+          {hasPermission('view-products') && (
+            <NavLink to="/admin/novedades" className={getNavLinkClass}>
+              <Newspaper className="h-4 w-4" />
+              Novedades
+            </NavLink>
+          )}
           {hasPermission('view-categories') && (
             <NavLink to="/admin/categorias" className={getNavLinkClass}>
               <Tag className="h-4 w-4" />
@@ -95,6 +101,12 @@ const AdminLayout = () => {
             <NavLink to="/admin/reviews" className={getNavLinkClass}>
               <MessageSquare className="h-4 w-4" />
               Reseñas
+            </NavLink>
+          )}
+          {hasPermission('manage-products') && (
+            <NavLink to="/admin/comments" className={getNavLinkClass}>
+              <MessagesSquare className="h-4 w-4" />
+              Comentarios
             </NavLink>
           )}
         </nav>

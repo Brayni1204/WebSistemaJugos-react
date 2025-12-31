@@ -9,8 +9,18 @@
 * 🟢 You can import this file directly.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TenantStatus = void 0;
+exports.CommentStatus = exports.TenantStatus = exports.ReviewStatus = void 0;
+exports.ReviewStatus = {
+    PENDING: 'PENDING',
+    APPROVED: 'APPROVED',
+    REJECTED: 'REJECTED'
+};
 exports.TenantStatus = {
     ACTIVE: 'ACTIVE',
     INACTIVE: 'INACTIVE'
+};
+exports.CommentStatus = {
+    PENDING: 'PENDING',
+    APPROVED: 'APPROVED',
+    REJECTED: 'REJECTED'
 };

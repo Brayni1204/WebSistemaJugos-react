@@ -518,14 +518,6 @@ export type GastoUncheckedUpdateManyWithoutProveedorNestedInput = {
   deleteMany?: Prisma.GastoScalarWhereInput | Prisma.GastoScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type GastoCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.GastoCreateWithoutItemsInput, Prisma.GastoUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.GastoCreateOrConnectWithoutItemsInput

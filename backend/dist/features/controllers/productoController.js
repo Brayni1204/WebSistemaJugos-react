@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.destroy = exports.update = exports.show = exports.store = exports.publicIndex = exports.index = void 0;
+exports.publicShow = exports.destroy = exports.update = exports.show = exports.store = exports.publicIndex = exports.index = void 0;
 const prisma_1 = __importDefault(require("@/config/prisma"));
 const cloudinary_1 = require("../../config/cloudinary");
 const promises_1 = __importDefault(require("fs/promises"));
@@ -318,3 +318,34 @@ const destroy = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.destroy = destroy;
+const publicShow = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    const tenantId = (_a = req.tenant) === null || _a === void 0 ? void 0 : _a.id;
+    if (!tenantId) {
+        return res.status(400).json({ error: 'Tenant not identified.' });
+    }
+    const { id } = req.params;
+    if (isNaN(Number(id))) {
+        return res.status(400).json({ error: 'El ID del producto debe ser un número.' });
+    }
+    try {
+        const producto = yield prisma_1.default.producto.findFirst({
+            where: {
+                AND: [{ id: parseInt(id) }, { tenantId }, { status: 1 }] // Only show active products
+            },
+            include: {
+                categoria: true,
+                componentes: true,
+            },
+        });
+        if (!producto) {
+            return res.status(404).json({ error: 'Producto no encontrado.' });
+        }
+        res.json(producto);
+    }
+    catch (error) {
+        console.error('Error fetching public product:', error);
+        res.status(500).json({ error: 'Error al obtener el producto.' });
+    }
+});
+exports.publicShow = publicShow;

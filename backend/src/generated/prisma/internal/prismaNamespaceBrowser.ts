@@ -50,6 +50,8 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 export const ModelName = {
   Tenant: 'Tenant',
+  Novedad: 'Novedad',
+  PageComment: 'PageComment',
   Proveedor: 'Proveedor',
   Gasto: 'Gasto',
   DetalleGasto: 'DetalleGasto',
@@ -128,6 +130,36 @@ export const TenantScalarFieldEnum = {
 } as const
 
 export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
+
+
+export const NovedadScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  imageUrl: 'imageUrl',
+  published: 'published',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  tenantId: 'tenantId'
+} as const
+
+export type NovedadScalarFieldEnum = (typeof NovedadScalarFieldEnum)[keyof typeof NovedadScalarFieldEnum]
+
+
+export const PageCommentScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  pageType: 'pageType',
+  pageId: 'pageId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId',
+  tenantId: 'tenantId',
+  parentId: 'parentId'
+} as const
+
+export type PageCommentScalarFieldEnum = (typeof PageCommentScalarFieldEnum)[keyof typeof PageCommentScalarFieldEnum]
 
 
 export const ProveedorScalarFieldEnum = {
@@ -582,6 +614,23 @@ export const TenantOrderByRelevanceFieldEnum = {
 } as const
 
 export type TenantOrderByRelevanceFieldEnum = (typeof TenantOrderByRelevanceFieldEnum)[keyof typeof TenantOrderByRelevanceFieldEnum]
+
+
+export const NovedadOrderByRelevanceFieldEnum = {
+  title: 'title',
+  content: 'content',
+  imageUrl: 'imageUrl'
+} as const
+
+export type NovedadOrderByRelevanceFieldEnum = (typeof NovedadOrderByRelevanceFieldEnum)[keyof typeof NovedadOrderByRelevanceFieldEnum]
+
+
+export const PageCommentOrderByRelevanceFieldEnum = {
+  content: 'content',
+  pageType: 'pageType'
+} as const
+
+export type PageCommentOrderByRelevanceFieldEnum = (typeof PageCommentOrderByRelevanceFieldEnum)[keyof typeof PageCommentOrderByRelevanceFieldEnum]
 
 
 export const ProveedorOrderByRelevanceFieldEnum = {

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // src/components/public/ProductCard.tsx
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import type { Product } from '@/api/productsApi';
 import { cn } from '@/lib/utils';
 import { ShoppingCart, Plus } from 'lucide-react';
@@ -21,7 +21,9 @@ const ProductCard = ({ product, isTableMenu = false }: ProductCardProps) => {
     const regularCart = useCart();
     const tableOrder = inTableMenu ? useTableOrder() : null;
 
-    const handleAddItem = () => {
+    const handleAddItem = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
         if (inTableMenu && tableOrder) {
             tableOrder.addItem(product);
         } else {
@@ -29,7 +31,7 @@ const ProductCard = ({ product, isTableMenu = false }: ProductCardProps) => {
         }
     };
 
-    return (
+    const cardContent = (
         <div
             className={cn(
                 "group flex flex-col h-full",
@@ -83,6 +85,16 @@ const ProductCard = ({ product, isTableMenu = false }: ProductCardProps) => {
                 </div>
             </div>
         </div>
+    );
+
+    if (inTableMenu) {
+        return cardContent;
+    }
+
+    return (
+        <Link to={`/productos/${product.id}`} className="block h-full">
+            {cardContent}
+        </Link>
     );
 };
 

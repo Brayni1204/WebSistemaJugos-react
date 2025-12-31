@@ -30,10 +30,15 @@ const tenantSettingsRoutes_1 = __importDefault(require("@/api/admin/tenantSettin
 const proveedorRoutes_1 = __importDefault(require("@/api/admin/proveedorRoutes"));
 const gastoRoutes_1 = __importDefault(require("@/api/admin/gastoRoutes"));
 const userManagementRoutes_1 = __importDefault(require("@/api/admin/userManagementRoutes"));
+const reviewManagementRoutes_1 = __importDefault(require("@/api/admin/reviewManagementRoutes"));
 const dashboardRoutes_1 = __importDefault(require("@/api/admin/dashboardRoutes"));
+const novedadesRoutes_1 = __importDefault(require("@/api/admin/novedadesRoutes"));
+const commentManagementRoutes_1 = __importDefault(require("@/api/admin/commentManagementRoutes"));
 const mesaRoutes_2 = __importDefault(require("@/api/public/mesaRoutes"));
 const orderRoutes_2 = __importDefault(require("@/api/public/orderRoutes"));
 const productoRoutes_2 = __importDefault(require("@/api/public/productoRoutes"));
+const novedadesRoutes_2 = __importDefault(require("@/api/public/novedadesRoutes"));
+const commentRoutes_1 = __importDefault(require("@/api/commentRoutes"));
 const waiterRoutes_1 = __importDefault(require("@/api/waiterRoutes"));
 const tenantMiddleware_1 = __importDefault(require("@/middleware/tenantMiddleware"));
 const readOnlyDemoMiddleware_1 = __importDefault(require("@/middleware/readOnlyDemoMiddleware"));
@@ -50,10 +55,11 @@ app.use(tenantMiddleware_1.default);
 app.use(readOnlyDemoMiddleware_1.default);
 app.get('/api/tenant-info', (req, res) => {
     if (req.tenant) {
-        const { id, name, theme_color, theme_secondary_color, dark_mode_enabled, logo_url, description, address, contact_phone, business_email, social_links } = req.tenant;
+        const { id, name, theme_color, theme_secondary_color, dark_mode_enabled, logo_url, favicon_url, hero_banner_url, description, address, contact_phone, business_email, social_links, mision, vision, delivery_cost } = req.tenant;
         res.json({
             id, name, theme_color, theme_secondary_color, dark_mode_enabled,
-            logo_url, description, address, contact_phone, business_email, social_links
+            logo_url, favicon_url, hero_banner_url, description, address, contact_phone, business_email, social_links,
+            mision, vision, delivery_cost
         });
     }
     else {
@@ -77,10 +83,14 @@ app.use('/api/admin', roleRoutes_1.default);
 app.use('/api/admin', proveedorRoutes_1.default);
 app.use('/api/admin', gastoRoutes_1.default);
 app.use('/api/admin', userManagementRoutes_1.default);
+app.use('/api/admin', reviewManagementRoutes_1.default);
+app.use('/api/admin', commentManagementRoutes_1.default);
 app.use('/api/admin', dashboardRoutes_1.default);
+app.use('/api/admin', novedadesRoutes_1.default);
 app.use('/api/productos', resenaRoutes_1.default);
 app.use('/api/cart', cartRoutes_1.default);
 app.use('/api/profile', profileRoutes_1.default);
+app.use('/api/comments', commentRoutes_1.default);
 app.use('/api/admin', mesaRoutes_1.default);
 app.use('/api/admin', orderRoutes_1.default);
 app.use('/api/admin', orderStatusRoutes_1.default);
@@ -89,6 +99,7 @@ app.use('/api/public', categoriaRoutes_2.default);
 app.use('/api/public', empresaRoutes_1.default);
 app.use('/api/public', paginaRoutes_2.default);
 app.use('/api/public', productoRoutes_2.default);
+app.use('/api/public', novedadesRoutes_2.default);
 app.use('/api/public', orderRoutes_2.default);
 app.use('/api/public', mesaRoutes_2.default);
 app.use((err, req, res, next) => {

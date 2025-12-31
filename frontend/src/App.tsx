@@ -8,6 +8,8 @@ import CartPage from './pages/CartPage';
 import ProfilePage from './pages/ProfilePage';
 import GenericPage from './pages/GenericPage';
 import ProductDetailPage from './pages/ProductDetailPage';
+import NovedadesPage from './pages/NovedadesPage';
+import NovedadDetailPage from './pages/NovedadDetailPage';
 import RegisterPage from './pages/RegisterPage';
 import VerifyEmailPage from './pages/VerifyEmailPage';
 import LoginPage from './pages/LoginPage';
@@ -27,6 +29,8 @@ import RolesPage from './pages/admin/roles/RolesPage';
 import RoleEditPage from './pages/admin/roles/RoleEditPage';
 import UserManagementPage from './pages/admin/users/UserManagementPage';
 import ReviewManagementPage from './pages/admin/reviews/ReviewManagementPage';
+import CommentManagementPage from './pages/admin/comments/CommentManagementPage';
+import AdminNovedadesPage from './pages/admin/novedades/AdminNovedadesPage';
 import TenantSettingsPage from './pages/admin/tenant/TenantSettingsPage';
 import ProveedoresPage from './pages/admin/proveedores/ProveedoresPage';
 import GastosPage from './pages/admin/gastos/GastosPage';
@@ -63,6 +67,8 @@ function App() {
                         <Route path="/" element={<MainLayout />}>
                           <Route index element={<HomePage />} />
                           <Route path="nosotros" element={<AboutPage />} />
+                          <Route path="novedades" element={<NovedadesPage />} />
+                          <Route path="novedades/:id" element={<NovedadDetailPage />} />
                           <Route path="productos" element={<ProductsPage />} />
                           <Route path="productos/:id" element={<ProductDetailPage />} />
                           <Route path="carrito" element={<CartPage />} />
@@ -89,6 +95,7 @@ function App() {
                             <Route path="roles/:id" element={<RoleEditPage />} />
                             <Route path="users" element={<UserManagementPage />} />
                             <Route path="reviews" element={<ReviewManagementPage />} />
+                            <Route path="comments" element={<CommentManagementPage />} />
                             <Route path="proveedores" element={<ProveedoresPage />} />
                             <Route path="gastos" element={<GastosPage />} />
                             <Route path="gastos/nueva" element={<GastoCreatePage />} />
@@ -98,6 +105,7 @@ function App() {
                             <Route path="pedidos/:id/edit" element={<EditOrderPage />} />
                             <Route path="categorias" element={<CategoriesPage />} />
                             <Route path="productos" element={<AdminProductsPage />} />
+                            <Route path="novedades" element={<AdminNovedadesPage />} />
                             <Route path="mesas" element={<MesasPage />} />
                           </Route>
                           <Route path="pedidos/:id/receipt" element={<ReceiptPage mode="admin" />} />

@@ -1,11 +1,12 @@
 // src/pages/AboutPage.tsx
 import { useTenant } from '@/contexts/TenantContext';
 import { Mail, Phone, MapPin, History, Target, Eye, Truck } from 'lucide-react';
+import CommentSection from '@/components/public/CommentSection';
 
 const AboutPage = () => {
   const { tenantInfo, isLoading } = useTenant();
-
-  if (isLoading) {
+  
+    if (isLoading) {
     return (
       <div className="container mx-auto p-8 animate-pulse bg-background">
         <div className="h-64 bg-zinc-100 rounded-3xl mb-12"></div>
@@ -135,6 +136,11 @@ const AboutPage = () => {
 
               </div>
             </section>
+          </div>
+
+          <div className="mt-12 pt-8 border-t border-border">
+              <h2 className="text-2xl font-bold text-foreground mb-6">Comentarios</h2>
+              <CommentSection pageType="about" pageId={1} />
           </div>
         </div>
       </div>

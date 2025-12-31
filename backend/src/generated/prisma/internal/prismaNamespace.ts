@@ -391,6 +391,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Tenant: 'Tenant',
+  Novedad: 'Novedad',
+  PageComment: 'PageComment',
   Proveedor: 'Proveedor',
   Gasto: 'Gasto',
   DetalleGasto: 'DetalleGasto',
@@ -433,7 +435,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "tenant" | "proveedor" | "gasto" | "detalleGasto" | "empresa" | "user" | "cliente" | "categoria" | "producto" | "componente" | "resena" | "cart" | "cartItem" | "historialPrecio" | "pedido" | "detallePedido" | "venta" | "detalleVenta" | "mesa" | "estadoPedido" | "pago" | "direccion" | "pagina" | "subtitulo" | "parrafo" | "image" | "role" | "permission"
+    modelProps: "tenant" | "novedad" | "pageComment" | "proveedor" | "gasto" | "detalleGasto" | "empresa" | "user" | "cliente" | "categoria" | "producto" | "componente" | "resena" | "cart" | "cartItem" | "historialPrecio" | "pedido" | "detallePedido" | "venta" | "detalleVenta" | "mesa" | "estadoPedido" | "pago" | "direccion" | "pagina" | "subtitulo" | "parrafo" | "image" | "role" | "permission"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -500,6 +502,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.TenantCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TenantCountAggregateOutputType> | number
+        }
+      }
+    }
+    Novedad: {
+      payload: Prisma.$NovedadPayload<ExtArgs>
+      fields: Prisma.NovedadFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NovedadFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NovedadPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NovedadFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NovedadPayload>
+        }
+        findFirst: {
+          args: Prisma.NovedadFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NovedadPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NovedadFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NovedadPayload>
+        }
+        findMany: {
+          args: Prisma.NovedadFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NovedadPayload>[]
+        }
+        create: {
+          args: Prisma.NovedadCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NovedadPayload>
+        }
+        createMany: {
+          args: Prisma.NovedadCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.NovedadDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NovedadPayload>
+        }
+        update: {
+          args: Prisma.NovedadUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NovedadPayload>
+        }
+        deleteMany: {
+          args: Prisma.NovedadDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NovedadUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.NovedadUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NovedadPayload>
+        }
+        aggregate: {
+          args: Prisma.NovedadAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNovedad>
+        }
+        groupBy: {
+          args: Prisma.NovedadGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NovedadGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NovedadCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NovedadCountAggregateOutputType> | number
+        }
+      }
+    }
+    PageComment: {
+      payload: Prisma.$PageCommentPayload<ExtArgs>
+      fields: Prisma.PageCommentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PageCommentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PageCommentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PageCommentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PageCommentPayload>
+        }
+        findFirst: {
+          args: Prisma.PageCommentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PageCommentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PageCommentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PageCommentPayload>
+        }
+        findMany: {
+          args: Prisma.PageCommentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PageCommentPayload>[]
+        }
+        create: {
+          args: Prisma.PageCommentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PageCommentPayload>
+        }
+        createMany: {
+          args: Prisma.PageCommentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.PageCommentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PageCommentPayload>
+        }
+        update: {
+          args: Prisma.PageCommentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PageCommentPayload>
+        }
+        deleteMany: {
+          args: Prisma.PageCommentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PageCommentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.PageCommentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PageCommentPayload>
+        }
+        aggregate: {
+          args: Prisma.PageCommentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePageComment>
+        }
+        groupBy: {
+          args: Prisma.PageCommentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PageCommentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PageCommentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PageCommentCountAggregateOutputType> | number
         }
       }
     }
@@ -2359,6 +2493,36 @@ export const TenantScalarFieldEnum = {
 export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
 
 
+export const NovedadScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  imageUrl: 'imageUrl',
+  published: 'published',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  tenantId: 'tenantId'
+} as const
+
+export type NovedadScalarFieldEnum = (typeof NovedadScalarFieldEnum)[keyof typeof NovedadScalarFieldEnum]
+
+
+export const PageCommentScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  pageType: 'pageType',
+  pageId: 'pageId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId',
+  tenantId: 'tenantId',
+  parentId: 'parentId'
+} as const
+
+export type PageCommentScalarFieldEnum = (typeof PageCommentScalarFieldEnum)[keyof typeof PageCommentScalarFieldEnum]
+
+
 export const ProveedorScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -2813,6 +2977,23 @@ export const TenantOrderByRelevanceFieldEnum = {
 export type TenantOrderByRelevanceFieldEnum = (typeof TenantOrderByRelevanceFieldEnum)[keyof typeof TenantOrderByRelevanceFieldEnum]
 
 
+export const NovedadOrderByRelevanceFieldEnum = {
+  title: 'title',
+  content: 'content',
+  imageUrl: 'imageUrl'
+} as const
+
+export type NovedadOrderByRelevanceFieldEnum = (typeof NovedadOrderByRelevanceFieldEnum)[keyof typeof NovedadOrderByRelevanceFieldEnum]
+
+
+export const PageCommentOrderByRelevanceFieldEnum = {
+  content: 'content',
+  pageType: 'pageType'
+} as const
+
+export type PageCommentOrderByRelevanceFieldEnum = (typeof PageCommentOrderByRelevanceFieldEnum)[keyof typeof PageCommentOrderByRelevanceFieldEnum]
+
+
 export const ProveedorOrderByRelevanceFieldEnum = {
   name: 'name',
   ruc: 'ruc',
@@ -3064,6 +3245,13 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
 
 
 /**
+ * Reference to a field of type 'CommentStatus'
+ */
+export type EnumCommentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CommentStatus'>
+    
+
+
+/**
  * Reference to a field of type 'ReviewStatus'
  */
 export type EnumReviewStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReviewStatus'>
@@ -3164,6 +3352,8 @@ export interface PrismaClientOptions {
 }
 export type GlobalOmitConfig = {
   tenant?: Prisma.TenantOmit
+  novedad?: Prisma.NovedadOmit
+  pageComment?: Prisma.PageCommentOmit
   proveedor?: Prisma.ProveedorOmit
   gasto?: Prisma.GastoOmit
   detalleGasto?: Prisma.DetalleGastoOmit

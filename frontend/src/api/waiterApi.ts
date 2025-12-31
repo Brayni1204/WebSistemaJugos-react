@@ -46,11 +46,12 @@ export interface OrderItem {
     precio_total: number;
     descripcion?: string;
     producto: Product;
+    producto_id: number;
 }
 
 export interface Customer {
     id: number;
-    nombre?: string;
+    nombre: string | null;
     telefono?: string;
 }
 
@@ -61,6 +62,8 @@ export interface Order {
     total_pago: number;
     detalle_pedidos: OrderItem[];
     cliente?: Customer;
+    created_at: string;
+    mesa?: { numero_mesa: number } | null;
     // other fields...
 }
 

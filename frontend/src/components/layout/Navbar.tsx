@@ -43,6 +43,12 @@ const Navbar = () => {
               )}>
                 Nosotros
               </Link>
+              <Link to="/novedades" className={cn(
+                "px-3 py-2 rounded-md text-sm font-medium",
+                "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              )}>
+                Novedades
+              </Link>
               {/* Dynamic pages will be added later */}
             </div>
           </div>

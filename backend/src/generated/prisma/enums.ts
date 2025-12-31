@@ -24,3 +24,12 @@ export const TenantStatus = {
 } as const
 
 export type TenantStatus = (typeof TenantStatus)[keyof typeof TenantStatus]
+
+
+export const CommentStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type CommentStatus = (typeof CommentStatus)[keyof typeof CommentStatus]

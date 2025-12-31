@@ -22,7 +22,7 @@ export interface CreateResenaPayload {
     comment?: string;
 }
 
-const BASE_ENDPOINT = '/api/productos'; // Note: The route is nested under productos
+const BASE_ENDPOINT = '/productos'; // Note: The route is nested under productos
 
 export const getResenasForProduct = (productId: number): Promise<GetResenasResponse> => {
   return http.get<GetResenasResponse>(`${BASE_ENDPOINT}/${productId}/resenas`);

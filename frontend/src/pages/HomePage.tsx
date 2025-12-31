@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { getPublicCategories, type Category } from '@/api/categoryApi';
-import { getPublicEmpresa, type Empresa } from '@/api/empresaApi';
 import { getPublicPaginas, type Pagina } from '@/api/paginaApi';
 import CategoryCard from '@/components/categories/CategoryCard';
 import { Link } from 'react-router-dom';
+import { useTenant } from '@/contexts/TenantContext';
 
 
 const HomePage = () => {
+  const { tenantInfo, isLoading: isTenantLoading } = useTenant();
   const [categories, setCategories] = useState<Category[]>([]);
-  const [empresa, setEmpresa] = useState<Empresa | null>(null);
   const [paginas, setPaginas] = useState<Pagina[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -18,16 +18,12 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        // Use the dedicated API functions for clarity and consistency
-        const [catResponse, empresaData, paginasData] = await Promise.all([
-            getPublicCategories({ limit: 6 }), // Assuming we want a limited number for the homepage
-            getPublicEmpresa(),
+        const [catResponse, paginasData] = await Promise.all([
+            getPublicCategories({ limit: 6 }),
             getPublicPaginas()
         ]);
         
-        // Correctly handle the paginated response for categories
         setCategories(catResponse.data);
-        setEmpresa(empresaData.length > 0 ? empresaData[0] : null);
         setPaginas(paginasData);
         
       } catch (err: any) {
@@ -40,7 +36,7 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  if (isLoading) {
+  if (isLoading || isTenantLoading) {
     return <div className="container mx-auto p-4 text-center">Cargando...</div>;
   }
 
@@ -59,11 +55,11 @@ const HomePage = () => {
           </video>
         </div>
         <div className="relative z-10 bg-white bg-opacity-90 backdrop-blur-md shadow-2xl rounded-lg p-6 sm:p-10 w-[90%] max-w-xl text-center">
-            {empresa ? (
+            {tenantInfo ? (
                 <>
                     <p className="text-gray-500 text-sm tracking-wide">Bienvenidos</p>
-                    <h1 className="text-4xl font-bold text-gray-900 leading-tight mt-2">{empresa.nombre}</h1>
-                    <p className="text-gray-700 mt-4 text-lg">{empresa.descripcion}</p>
+                    <h1 className="text-4xl font-bold text-gray-900 leading-tight mt-2">{tenantInfo.name}</h1>
+                    <p className="text-gray-700 mt-4 text-lg">{tenantInfo.description}</p>
                     <Link to="/nosotros" className="mt-6 inline-block bg-linear-to-r from-cyan-500 to-blue-500 text-white px-6 py-2 rounded-lg text-lg font-semibold shadow-md hover:scale-105 hover:shadow-xl transition-all">
                         Más información
                     </Link>
