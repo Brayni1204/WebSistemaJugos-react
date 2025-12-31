@@ -65,10 +65,3 @@ networks:
 
 volumes:
   db-data:
-
-networks:
-  app-network:
-    driver: bridge
-
-volumes:
-  db-data:
