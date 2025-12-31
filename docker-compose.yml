@@ -3,7 +3,6 @@ version: '3.8'
 
 services:
   backend:
-    image: web-sistema-jugueria-backend-custom:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -22,14 +21,11 @@ services:
       - app-network
 
   frontend:
-    image: web-sistema-jugueria-frontend-custom:latest
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "6090:80"
-    # No environment variables needed here anymore as they are baked in during build
-    # or handled by nginx proxying to the relative /api path
     depends_on:
       - backend
     networks:
@@ -50,19 +46,25 @@ services:
       - app-network
 
   prisma-studio:
-    image: node:20-alpine
-    working_dir: /app
-    volumes:
-      - ./backend:/app
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "6093:5555"
     environment:
       - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
-    command: sh -c "npx prisma generate && npx prisma studio --port 5555"
+    command: sh -c "npx prisma generate --schema=./prisma/schema.prisma && npx prisma studio --port 5555 --schema=./prisma/schema.prisma"
     depends_on:
       - db
     networks:
       - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:
 
 networks:
   app-network:
