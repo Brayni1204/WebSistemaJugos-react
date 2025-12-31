@@ -48,7 +48,8 @@ services:
 
   prisma-studio:
     build:
-      context: ./backend # Build from backend to get schema
+      context: ./backend # Le dice a Docker/Portainer que construya desde la carpeta backend
+      dockerfile: Dockerfile
     ports:
       - "6093:5555"
     environment:
