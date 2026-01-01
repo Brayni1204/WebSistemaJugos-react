@@ -1,8 +1,5 @@
-# backend/Dockerfile
-
 # --- 1. Builder Stage ---
-# This stage installs all dependencies (including devDependencies) and builds the application.
-FROM node:20-alpine AS builder
+FROM node:20-slim AS builder
 
 # Set the working directory
 WORKDIR /app
@@ -22,19 +19,14 @@ RUN npm rebuild
 # Copy the rest of the application source code
 COPY . .
 
-        # Generate the Prisma client
+# Generate the Prisma client
+RUN npx prisma generate
 
-        RUN npx prisma generate
-
-    
-
-        # Build the TypeScript code
-
-        RUN npm run build
+# Build the TypeScript code
+RUN npm run build
 
 # --- 2. Pruner Stage ---
-# This stage removes devDependencies to create a clean production node_modules directory.
-FROM node:20-alpine AS pruner
+FROM node:20-slim AS pruner
 
 WORKDIR /app
 
@@ -46,8 +38,7 @@ COPY --from=builder /app/package-lock.json ./package-lock.json
 RUN npm ci --omit=dev
 
 # --- 3. Final Production Stage ---
-# This stage creates the final, lean production image.
-FROM node:20-alpine
+FROM node:20-slim
 
 # Set NODE_ENV to production
 ENV NODE_ENV=production
@@ -57,20 +48,28 @@ WORKDIR /app
 # Copy the pruned node_modules from the pruner stage
 COPY --from=pruner /app/node_modules ./node_modules
 
-# Copy the generated prisma client from the builder stage
+# Copy the generated prisma client from the builder stage (where prisma generate ran)
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
 # Copy the built application code from the builder stage
 COPY --from=builder /app/dist ./dist
 
 # Copy package.json, package-lock.json (from pruner stage)
+# These are needed for runtime metadata, not for node_modules content now
 COPY --from=pruner /app/package.json ./package.json
 COPY --from=pruner /app/package-lock.json ./package-lock.json
 
 # Copy schema.prisma
 COPY prisma ./prisma
 
-# Generate Prisma client in the final stage to ensure correct engine for runtime
+# Explicitly set Prisma binary targets for the Debian environment
+ENV PRISMA_BINARY_TARGETS="debian-openssl-3.0.x"
+
+# Install OpenSSL for Prisma's runtime detection
+RUN apt-get update -y && apt-get install -y openssl
+
+# Run npm install and prisma generate in the final stage to ensure correct engine
+RUN npm install --omit=dev --force # Reinstall production dependencies, force to avoid issues
 RUN npx prisma generate
 
 # The command to run the application
