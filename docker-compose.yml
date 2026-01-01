@@ -53,7 +53,17 @@ services:
       - "6093:5555"
     environment:
       - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
-    command: sh -c "npx prisma generate --schema=./prisma/schema.prisma && npx prisma studio --port 5555 --schema=./prisma/schema.prisma"
+    
+    # --- AGREGA ESTO ---
+    # Esto conecta tu carpeta real de prisma al contenedor. 
+    # Así nunca más dirá "file not found".
+    volumes:
+      - ./backend/prisma:/app/prisma
+    
+    # --- ACTUALIZA ESTO ---
+    # Usamos la ruta absoluta /app/prisma para ir a la segura
+    command: sh -c "npx prisma generate --schema=/app/prisma/schema.prisma && npx prisma studio --port 5555 --schema=/app/prisma/schema.prisma"
+    
     depends_on:
       - db
     networks:
