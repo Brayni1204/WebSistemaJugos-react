@@ -5,14 +5,16 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package files and prisma schema BEFORE installing dependencies
 COPY package.json ./
 COPY package-lock.json ./
+COPY prisma ./prisma
+
+# Install dependencies (this will also trigger prisma generate via postinstall)
 RUN npm install
 
-# Copy prisma schema and generate client
-COPY prisma ./prisma
-RUN npx prisma generate
+# No need to run generate again, it's done in postinstall
+# RUN npx prisma generate
 
 # Copy the rest of the application source code
 COPY . .
