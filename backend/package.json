@@ -17,6 +17,9 @@
   "prisma": {
     "seed": "dotenv -e .env -- ts-node prisma/seed.ts"
   },
+  "_moduleAliases": {
+    "@": "dist"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -33,6 +36,7 @@
     "express-rate-limit": "^8.2.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
     "otp-generator": "^4.0.1",

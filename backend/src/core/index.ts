@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import * as dotenv from 'dotenv';
 dotenv.config(); // Ensure env vars are loaded first
 
