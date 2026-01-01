@@ -14,55 +14,58 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const prisma_1 = __importDefault(require("@/config/prisma"));
 const tenantMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('--- Tenant Middleware Triggered ---');
-    let hostname = req.hostname;
-    console.log(`Initial hostname: ${hostname}`);
-    console.log(`Request Origin header: ${req.headers.origin}`);
-    // For cross-origin requests in development, hostname might be 'localhost'.
-    // The 'Origin' header will contain the actual frontend URL with the subdomain.
-    if (hostname === 'localhost' && req.headers.origin) {
-        try {
-            const originUrl = new URL(req.headers.origin);
-            hostname = originUrl.hostname; // e.g., "chavez-tienda.localhost"
-            console.log(`Hostname updated from Origin header: ${hostname}`);
-        }
-        catch (e) {
-            // Invalid origin header, proceed with the original hostname
-            console.warn('Invalid Origin header:', req.headers.origin);
-        }
-    }
-    const parts = hostname.split('.');
-    let subdomain = null;
-    // Logic to extract subdomain, e.g., 'subdomain.localhost' or 'subdomain.example.com'
-    if (parts.length > 1) {
-        // Avoid using 'www' or the main domain part as a subdomain
-        if (parts[0] !== 'www' && parts[0] !== 'localhost') {
-            subdomain = parts[0];
-        }
-        else if (parts.length > 2 && parts[1] !== 'localhost') {
-            // Handle cases like www.subdomain.example.com (less common for this app)
-            subdomain = parts[1];
-        }
-    }
-    const tenantSubdomain = subdomain || process.env.DEMO_TENANT_SUBDOMAIN || 'demo';
-    console.log(`Attempting to find tenant for subdomain: '${tenantSubdomain}'`);
     try {
+        let hostname = req.hostname;
+        const appDomain = process.env.APP_DOMAIN; // Should be: "jugueria.techinnovats.com"
+        // Handle proxy headers (Portainer/Nginx) and local development
+        if (hostname === 'localhost' && req.headers.origin) {
+            try {
+                const originUrl = new URL(req.headers.origin);
+                hostname = originUrl.hostname;
+            }
+            catch (e) {
+                console.warn('Invalid Origin header:', req.headers.origin);
+            }
+        }
+        let subdomain = '';
+        // CORRECTED LOGIC
+        // Case 1: We are exactly on the main domain (e.g., jugueria.techinnovats.com)
+        if (hostname === appDomain) {
+            subdomain = process.env.DEMO_TENANT_SUBDOMAIN || 'demo';
+        }
+        // Case 2: We are on a subdomain (e.g., chavez-tienda.jugueria.techinnovats.com)
+        else if (appDomain && hostname.endsWith(`.${appDomain}`)) {
+            // Extract what is BEFORE the main domain
+            const parts = hostname.split(`.${appDomain}`);
+            if (parts[0]) {
+                subdomain = parts[0];
+            }
+        }
+        // Case 3: Local Development
+        else if (hostname.endsWith('.localhost')) {
+            subdomain = hostname.replace('.localhost', '');
+        }
+        // Security fallback
+        if (!subdomain) {
+            subdomain = process.env.DEMO_TENANT_SUBDOMAIN || 'demo';
+        }
+        console.log(`Detected Hostname: ${hostname} | Extracted Subdomain: ${subdomain}`);
+        // Database Lookup
         const tenant = yield prisma_1.default.tenant.findUnique({
-            where: {
-                subdomain: tenantSubdomain,
-            },
+            where: { subdomain: subdomain },
         });
         if (!tenant) {
-            console.error(`!!! TENANT NOT FOUND for subdomain '${tenantSubdomain}'. Sending 404.`);
-            return res.status(404).json({ message: `Tenant '${tenantSubdomain}' not found.` });
+            console.error(`!!! TENANT NOT FOUND: '${subdomain}'. Hostname was: ${hostname}`);
+            return res.status(404).json({
+                message: `Tenant '${subdomain}' not found.`,
+                debug: { hostname, extractedSubdomain: subdomain }
+            });
         }
-        console.log(`Tenant found: ${tenant.name} (ID: ${tenant.id})`);
         if (tenant.status !== 'ACTIVE') {
-            console.error(`!!! TENANT INACTIVE: '${tenant.name}'. Sending 403.`);
-            return res.status(403).json({ message: 'This site is currently inactive. Please contact support.' });
+            return res.status(403).json({ message: 'Site is inactive.' });
         }
+        // Inject tenant into the request
         req.tenant = tenant;
-        console.log('--- Tenant Middleware Success, calling next() ---');
         next();
     }
     catch (error) {
