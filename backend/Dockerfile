@@ -1,39 +1,65 @@
 # backend/Dockerfile
 
-# --- 1. Build Stage ---
-FROM node:20-alpine AS build
+# --- 1. Builder Stage ---
+# This stage installs all dependencies (including devDependencies) and builds the application.
+FROM node:20-alpine AS builder
 
+# Set the working directory
 WORKDIR /app
 
-# Copy package files and prisma schema BEFORE installing dependencies
+# Set NODE_ENV to development to ensure devDependencies are installed
+ENV NODE_ENV=development
+
+# Copy package.json and package-lock.json
 COPY package.json ./
 COPY package-lock.json ./
 COPY prisma ./prisma
 
-# Install dependencies (this will also trigger prisma generate via postinstall)
+# Install all dependencies
 RUN npm install
-
-# No need to run generate again, it's done in postinstall
-# RUN npx prisma generate
 
 # Copy the rest of the application source code
 COPY . .
 
+# Generate the Prisma client
+RUN npx prisma generate
+
 # Build the TypeScript code
 RUN npm run build
 
-# --- 2. Production Stage ---
-FROM node:20-alpine
+# --- 2. Pruner Stage ---
+# This stage removes devDependencies to create a clean production node_modules directory.
+FROM node:20-alpine AS pruner
 
 WORKDIR /app
 
-# Copy built assets from the build stage
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/package.json ./package.json
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/package-lock.json ./
 
-# Expose the port the app runs on
-EXPOSE 5000
+# Install only production dependencies
+RUN npm ci --omit=dev
+
+# --- 3. Final Production Stage ---
+# This stage creates the final, lean production image.
+FROM node:20-alpine
+
+# Set NODE_ENV to production
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+# Copy the pruned node_modules from the pruner stage
+COPY --from=pruner /app/node_modules ./node_modules
+
+# Copy the generated prisma client from the builder stage
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+
+# Copy the built application code from the builder stage
+COPY --from=builder /app/dist ./dist
+
+# Copy other necessary files
+COPY package.json .
+COPY prisma ./prisma
 
 # The command to run the application
-CMD ["npm", "start"]
+CMD ["node", "dist/core/index.js"]
