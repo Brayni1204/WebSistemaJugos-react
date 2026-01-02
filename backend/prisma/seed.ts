@@ -1,6 +1,6 @@
 // prisma/seed.ts
 import { PrismaClient } from '../src/generated/prisma/client';
-import { PERMISSIONS } from '../src/config/permissions';
+import { PERMISSIONS } from '@/config/permissions';
 import * as bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 

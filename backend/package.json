@@ -15,7 +15,7 @@
     "prisma:seed": "dotenv -e .env -- npx prisma db seed --schema=./prisma/schema.prisma"
   },
   "prisma": {
-    "seed": "dotenv -e .env -- ts-node prisma/seed.ts"
+    "seed": "dotenv -e .env -- ts-node -r tsconfig-paths/register prisma/seed.ts"
   },
   "_moduleAliases": {
     "@": "dist"
@@ -46,6 +46,7 @@
     "uuid": "^13.0.0",
     "zod": "^4.1.12",
     "bcrypt": "^6.0.0",
+    "prisma": "^6.19.0",
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
@@ -55,15 +56,15 @@
     "@types/multer": "^2.0.0",
     "@types/node": "^24.9.2",
     "@types/otp-generator": "^4.0.2",
-    "@types/qrcode": "^1.5.6"
+    "@types/qrcode": "^1.5.6",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
     "cross-env": "^10.1.0",
     "dotenv-cli": "^11.0.0",
     "nodemon": "^3.1.10",
     "prisma": "^6.19.0",
-    "ts-node": "^10.9.2",
-    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.3"
   }
 }

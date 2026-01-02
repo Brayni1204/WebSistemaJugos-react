@@ -54,6 +54,9 @@ COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 # Copy the built application code from the builder stage
 COPY --from=builder /app/dist ./dist
 
+# Copy the application source code (src) to the final stage for seeding/development tools
+COPY src ./src
+
 # Copy package.json, package-lock.json (from pruner stage)
 # These are needed for runtime metadata, not for node_modules content now
 COPY --from=pruner /app/package.json ./package.json
@@ -61,6 +64,9 @@ COPY --from=pruner /app/package-lock.json ./package-lock.json
 
 # Copy schema.prisma
 COPY prisma ./prisma
+
+# Copy tsconfig.json to the final stage
+COPY tsconfig.json .
 
 # Explicitly set Prisma binary targets for the Debian environment
 ENV PRISMA_BINARY_TARGETS="debian-openssl-3.0.x"
